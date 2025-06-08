@@ -1,105 +1,126 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Jugadores UEFA U‑21 EURO 2025 • Estilo SCOUTED</title>
+  <meta charset="UTF-8" />
+  <title>Jugadores por Posición - UEFA U-21 EURO 2025</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap');
+
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: url('https://i.imgur.com/8QF5IUa.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: #222;
-    }
-    .overlay {
-      background: rgba(255,255,255,0.95);
-      min-height: 100vh;
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       padding: 2rem;
+      margin: 0;
     }
     h1 {
       text-align: center;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #0A2342;
+      color: #ff6600;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
     }
     table {
-      border-collapse: collapse;
       width: 100%;
-      background: white;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-collapse: collapse;
+      box-shadow: 0 0 10px rgba(255, 102, 0, 0.25);
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #1e1e1e;
+    }
+    thead {
+      background-color: #ff6600;
+      color: #121212;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     th, td {
-      padding: 0.75rem;
-      border: 1px solid #ddd;
-    }
-    th {
-      background-color: #0A2342;
-      color: white;
-      font-weight: 600;
-      position: sticky;
-      top: 0;
-    }
-    tr:nth-child(even) {
-      background: #f9f9f9;
-    }
-    .flag {
-      width: 24px;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid #2a2a2a;
       vertical-align: middle;
-      margin-right: 0.5rem;
     }
-    .position {
-      font-weight: 600;
-      color: #0A2342;
+    tbody tr:hover {
+      background-color: #333333;
+      cursor: pointer;
+    }
+    /* Banderas con emoji */
+    .flag {
+      font-size: 1.3rem;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    /* Columna equipo con flex para bandera y texto */
+    .team-cell {
+      display: flex;
+      align-items: center;
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <h1>UEFA U‑21 EURO 2025 – Jugadores por Posición</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Pos.</th>
-          <th>Selección</th>
-          <th>Club</th>
-          <th>Año</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Lucas Bergström</td>
-          <td class="position">POR</td>
-          <td><img class="flag" src="https://flagcdn.com/24x18/fi.png">Finlandia</td>
-          <td>Chelsea</td>
-          <td>2002</td>
-        </tr>
-        <tr>
-          <td>Noah Atubolu</td>
-          <td class="position">POR</td>
-          <td><img class="flag" src="https://flagcdn.com/24x18/de.png">Alemania</td>
-          <td>—</td>
-          <td>2002</td>
-        </tr>
-        <!-- Repite para cada jugador -->
-        <tr>
-          <td>Matteo Ruggeri</td>
-          <td class="position">LI</td>
-          <td><img class="flag" src="https://flagcdn.com/24x18/it.png">Italia</td>
-          <td>Atalanta</td>
-          <td>2002</td>
-        </tr>
-        <tr>
-          <td>Hayden Hackney</td>
-          <td class="position">MC</td>
-          <td><img class="flag" src="https://flagcdn.com/24x18/gb-eng.png">Inglaterra</td>
-          <td>Middlesbrough</td>
-          <td>2003</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <h1>Jugadores por Posición - UEFA U-21 EURO 2025</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Posición</th>
+        <th>Equipo</th>
+        <th>Año</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Ejemplo con bandera -->
+      <tr><td>Lucas Bergström</td><td>POR</td><td class="team-cell"><span class="flag">🇬🇧</span> Chelsea</td><td>2002</td></tr>
+      <tr><td>Noah Atubolu</td><td>POR</td><td class="team-cell"><span class="flag">🇩🇪</span> Alemania</td><td>2002</td></tr>
+      <tr><td>Nathaniel Brown</td><td>LD</td><td class="team-cell"><span class="flag">🇩🇪</span> Eintracht Frankfurt</td><td>2003</td></tr>
+      <tr><td>Tomas Galvez</td><td>LI</td><td class="team-cell"><span class="flag">🇬🇧</span> Manchester City</td><td>2005</td></tr>
+      <tr><td>Matteo Ruggeri</td><td>LI</td><td class="team-cell"><span class="flag">🇮🇹</span> Atalanta</td><td>2002</td></tr>
+      <tr><td>Michael Kayode</td><td>LD</td><td class="team-cell"><span class="flag">🇮🇹</span> Fiorentina</td><td>2004</td></tr>
+      <tr><td>Devyne Rensch</td><td>LD</td><td class="team-cell"><span class="flag">🇳🇱</span> Ajax</td><td>2003</td></tr>
+      <tr><td>Anton Gaaei</td><td>LD</td><td class="team-cell"><span class="flag">🇳🇱</span> Ajax</td><td>2002</td></tr>
+      <tr><td>Diego Coppola</td><td>DFC</td><td class="team-cell"><span class="flag">🇮🇹</span> Hellas Verona</td><td>2003</td></tr>
+      <tr><td>Ümit Akdağ</td><td>DFC</td><td class="team-cell"><span class="flag">🇫🇷</span> Toulouse</td><td>2003</td></tr>
+      <tr><td>Louis Munteanu</td><td>DC</td><td class="team-cell"><span class="flag">🇷🇴</span> CFR Cluj</td><td>2002</td></tr>
+      <tr><td>Jan Paluska</td><td>DFC</td><td class="team-cell"><span class="flag">🇨🇿</span> Viktor Plzeň</td><td>2005</td></tr>
+      <tr><td>Charlie Cresswell</td><td>DFC</td><td class="team-cell"><span class="flag">🇬🇧</span> Inglaterra</td><td>2002</td></tr>
+      <tr><td>Finn Jeltsch</td><td>DFC</td><td class="team-cell"><span class="flag">🇩🇪</span> VfB Stuttgart</td><td></td></tr>
+      <tr><td>Nathan Zézé</td><td>DFC</td><td></td><td></td></tr>
+      <tr><td>Cristhian Mosquera</td><td>DFC</td><td class="team-cell"><span class="flag">🇪🇸</span> Valencia</td><td>2004</td></tr>
+      <tr><td>César Tárrega</td><td>DFC</td><td class="team-cell"><span class="flag">🇪🇸</span> Valencia</td><td>2002</td></tr>
+      <tr><td>Taras Mykhavko</td><td>DFC</td><td class="team-cell"><span class="flag">🇺🇦</span> Dynamo Kyiv</td><td>2005</td></tr>
+      <tr><td>Ryan Flamingo</td><td>DFC</td><td class="team-cell"><span class="flag">🇳🇱</span> Países Bajos</td><td>2002</td></tr>
+      <tr><td>Wout Goes</td><td>DFC</td><td class="team-cell"><span class="flag">🇳🇱</span> Países Bajos</td><td>2004</td></tr>
+      <tr><td>Jorrel Hato</td><td>DFC</td><td class="team-cell"><span class="flag">🇳🇱</span> Países Bajos</td><td>2006</td></tr>
+      <tr><td>Volodymyr Brazhko</td><td>MC</td><td class="team-cell"><span class="flag">🇺🇦</span> Dynamo Kyiv</td><td>2002</td></tr>
+      <tr><td>Noah Nartey</td><td>MC</td><td class="team-cell"><span class="flag">🇩🇰</span> Dinamarca</td><td></td></tr>
+      <tr><td>Lucien Agoumé</td><td>MC</td><td class="team-cell"><span class="flag">🇫🇷</span> Francia</td><td>2002</td></tr>
+      <tr><td>Hayden Hackney</td><td>MC</td><td class="team-cell"><span class="flag">🇬🇧</span> Inglaterra</td><td>2003</td></tr>
+      <tr><td>Matěj Šín</td><td>MC</td><td class="team-cell"><span class="flag">🇨🇿</span> Baník Ostrava</td><td>2004</td></tr>
+      <tr><td>Mikel Jauregizar</td><td>MC</td><td></td><td>2003</td></tr>
+      <tr><td>Leo Sauer</td><td>ED</td><td class="team-cell"><span class="flag">🇳🇱</span> Feyenoord</td><td>2005</td></tr>
+      <tr><td>Juho Talvitie</td><td>ED</td><td class="team-cell"><span class="flag">🇫🇮</span> Heracles Almelo</td><td>2005</td></tr>
+      <tr><td>Jesús Rodríguez</td><td>EI</td><td></td><td>2005</td></tr>
+      <tr><td>Yeremay Hernández</td><td>EI</td><td></td><td>2002</td></tr>
+      <tr><td>Raúl Moro</td><td>EI</td><td></td><td>2002</td></tr>
+      <tr><td>Paul Wanner</td><td>EI</td><td class="team-cell"><span class="flag">🇩🇪</span> Bayern</td><td></td></tr>
+      <tr><td>Roger Fernandes</td><td>EI</td><td class="team-cell"><span class="flag">🇵🇹</span> Portugal</td><td>2005</td></tr>
+      <tr><td>Geovany Quenda</td><td>EI</td><td class="team-cell"><span class="flag">🇬🇧</span> Chelsea</td><td></td></tr>
+      <tr><td>Gabriel Sigua</td><td>MC</td><td class="team-cell"><span class="flag">🇨🇭</span> FC Basel</td><td>2005</td></tr>
+      <tr><td>Rocco Reitz</td><td>MC</td><td class="team-cell"><span class="flag">🇩🇪</span> Alemania</td><td>2002</td></tr>
+      <tr><td>Merlin Röhl</td><td>MC</td><td class="team-cell"><span class="flag">🇩🇪</span> Alemania</td><td>2002</td></tr>
+      <tr><td>Paul Nebel</td><td>MC</td><td class="team-cell"><span class="flag">🇩🇪</span> Alemania</td><td>2002</td></tr>
+      <tr><td>Castello Lukeba</td><td>DFC</td><td class="team-cell"><span class="flag">🇫🇷</span> Francia</td><td>2002</td></tr>
+      <tr><td>Thierno Barry</td><td>DC</td><td class="team-cell"><span class="flag">🇫🇷</span> Francia</td><td>2003</td></tr>
+      <tr><td>Szymon Włodarczyk</td><td>DC</td><td class="team-cell"><span class="flag">🇵🇱</span> Salernitana</td><td>2003</td></tr>
+      <tr><td>William Osula</td><td>DC</td><td class="team-cell"><span class="flag">🇬🇧</span> Newcastle United</td><td>2003</td></tr>
+      <tr><td>William Böving</td><td>DC</td><td class="team-cell"><span class="flag">🇩🇰</span> Sturm Graz</td><td>2003</td></tr>
+      <tr><td>Mathias Kvistgaarden</td><td>DC</td><td class="team-cell"><span class="flag">🇩🇰</span> Brøndby</td><td>2002</td></tr>
+      <tr><td>Conrad Harder</td><td>DC</td><td class="team-cell"><span class="flag">🇩🇰</span> Sporting CP</td><td>2005</td></tr>
+      <tr><td>Ethan Nwaneri</td><td>MP</td><td class="team-cell"><span class="flag">🇬🇧</span> Arsenal</td><td>2007</td></tr>
+      <tr><td>Ezechiel Banzuzi</td><td>MP</td><td></td><td>2005</td></tr>
+      <tr><td>Ruben van Bommel</td><td>MP</td><td></td><td>2004</td></tr>
+    </tbody>
+  </table>
 </body>
 </html>
