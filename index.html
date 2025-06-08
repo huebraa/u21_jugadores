@@ -1,158 +1,200 @@
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jugadores U-21 - Scout</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #e6f0ff;
+    margin: 20px;
+    color: #003366;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #004a99;
+  }
+  .filters {
+    max-width: 800px;
+    margin: 0 auto 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  select, input[type="text"] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #004a99;
+    border-radius: 4px;
+    min-width: 160px;
+  }
+  table {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 0 10px rgb(0 74 153 / 0.2);
+  }
+  thead {
+    background-color: #004a99;
+    color: white;
+  }
+  th, td {
+    padding: 10px;
+    border: 1px solid #b3c7ff;
+    vertical-align: top;
+    text-align: left;
+  }
+  tbody tr:nth-child(even) {
+    background: #f0f7ff;
+  }
+  .flag {
+    width: 24px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 6px;
+    border: 1px solid #ccc;
+  }
+  .descripcion {
+    max-width: 350px;
+    font-style: italic;
+    color: #003366cc;
+  }
+</style>
+</head>
+<body>
+  <h1>Jugadores U-21 - Scout</h1>
+
+  <div class="filters">
+    <select id="filterPais">
+      <option value="all">Todos los países</option>
+    </select>
+    <input type="text" id="searchNombre" placeholder="Buscar por nombre..." />
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Posición</th>
+        <th>País</th>
+        <th>Equipo</th>
+        <th>Año</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody id="tblJugadores">
+      <tr><td colspan="6" style="text-align:center;">Cargando...</td></tr>
+    </tbody>
+  </table>
+
 <script>
-  const supabase = supabase.createClient(
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRucHd6dm9rZnlia2hienlnZ3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkzNzcwNTksImV4cCI6MjA2NDk1MzA1OX0.d1QdJtCgSMZux2chEYe17Z0uh5vDzkeLab09US2zf7w',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRucHd6dm9rZnlia2hienlnZ3V6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0OTM3NzA1OSwiZXhwIjoyMDY0OTUzMDU5fQ.JMyM0bGjFoptoo8Kc1kNqUQwTtcVdDML0DnBX7kxmJg'
-  );
+  // Datos de jugadores (estático, para cambiar o añadir)
+  const jugadores = [
+    {nombre:"Lucas Bergström", posicion:"POR", pais:"Finlandia", equipo:"Chelsea", anio:"2002", descripcion:"Gran reflejo y buen juego aéreo, sólido bajo palos."},
+    {nombre:"Noah Atubolu", posicion:"POR", pais:"Alemania", equipo:"Alemania", anio:"2002", descripcion:"Portero ágil con buena salida, destaca en tiros desde fuera."},
+    {nombre:"Nathaniel Brown", posicion:"LD", pais:"Alemania", equipo:"Eintracht Frankfurt", anio:"2003", descripcion:"Defensa lateral rápido y ofensivo, buen centro."},
+    {nombre:"Tomas Galvez", posicion:"LI", pais:"Inglaterra", equipo:"Manchester City", anio:"2005", descripcion:"Jugador muy técnico, fuerte en recuperación y pase."},
+    {nombre:"Matteo Ruggeri", posicion:"LI", pais:"Italia", equipo:"Atalanta", anio:"2002", descripcion:"Defensa con buen sentido táctico y físico aguerrido."},
+    {nombre:"Michael Kayode", posicion:"LD", pais:"Italia", equipo:"Fiorentina", anio:"2004", descripcion:"Defensa rápido con buen manejo del balón y físico sólido."},
+    {nombre:"Devyne Rensch", posicion:"LD", pais:"Países Bajos", equipo:"Ajax", anio:"2003", descripcion:"Extremo convertido a lateral, gran velocidad y técnica."},
+    {nombre:"Anton Gaaei", posicion:"LD", pais:"Países Bajos", equipo:"Ajax", anio:"2002", descripcion:"Lateral con buen posicionamiento y resistencia."},
+    {nombre:"Diego Coppola", posicion:"DFC", pais:"Italia", equipo:"Hellas Verona", anio:"2003", descripcion:"Central fuerte y agresivo, excelente en duelos aéreos."},
+    {nombre:"Ümit Akdağ", posicion:"DFC", pais:"Turquía", equipo:"Toulouse", anio:"2003", descripcion:"Defensor con buen juego de pies y anticipación."},
+    {nombre:"Louis Munteanu", posicion:"DC", pais:"Rumanía", equipo:"CFR Cluj", anio:"2002", descripcion:"Delantero con buen disparo y capacidad para desmarcarse."},
+    {nombre:"Jan Paluska", posicion:"DFC", pais:"Chequia", equipo:"Viktor Plzeň", anio:"2005", descripcion:"Joven central con buen sentido de la ubicación."},
+    {nombre:"Charlie Cresswell", posicion:"DFC", pais:"Inglaterra", equipo:"Leeds United", anio:"2002", descripcion:"Central técnico con gran capacidad de pase."},
+    {nombre:"Finn Jeltsch", posicion:"DFC", pais:"Alemania", equipo:"VfB Stuttgart", anio:"", descripcion:"Defensa con buen físico y lectura de juego."},
+    {nombre:"Nathan Zézé", posicion:"DFC", pais:"Francia", equipo:"", anio:"", descripcion:"Central con buen control y anticipación."},
+    {nombre:"Cristhian Mosquera", posicion:"DFC", pais:"España", equipo:"Valencia", anio:"2004", descripcion:"Joven promesa con técnica depurada y buen posicionamiento."},
+    {nombre:"César Tárrega", posicion:"DFC", pais:"España", equipo:"Valencia", anio:"2002", descripcion:"Central con buen juego aéreo y salida limpia."},
+    {nombre:"Taras Mykhavko", posicion:"DFC", pais:"Ucrania", equipo:"Dynamo Kyiv", anio:"2005", descripcion:"Defensa con buen físico y valentía en el marcaje."},
+    {nombre:"Ryan Flamingo", posicion:"DFC", pais:"Países Bajos", equipo:"Países Bajos", anio:"2002", descripcion:"Defensor con rapidez y buen trato de balón."},
+    {nombre:"Wout Goes", posicion:"DFC", pais:"Países Bajos", equipo:"Países Bajos", anio:"2004", descripcion:"Central joven con buena técnica y lectura."},
+    {nombre:"Jorrel Hato", posicion:"DFC", pais:"Países Bajos", equipo:"Países Bajos", anio:"2006", descripcion:"Muy joven y con gran potencial defensivo."},
+    {nombre:"Volodymyr Brazhko", posicion:"MC", pais:"Ucrania", equipo:"Dynamo Kyiv", anio:"2002", descripcion:"Mediocentro con gran visión y pase preciso."},
+    {nombre:"Noah Nartey", posicion:"MC", pais:"Dinamarca", equipo:"Dinamarca", anio:"", descripcion:"Mediocentro con buen control y distribución."},
+    {nombre:"Lucien Agoumé", posicion:"MC", pais:"Francia", equipo:"Francia", anio:"2002", descripcion:"Mediocentro defensivo con buena agresividad y pase."},
+    {nombre:"Hayden Hackney", posicion:"MC", pais:"Inglaterra", equipo:"Inglaterra", anio:"2003", descripcion:"Jugador trabajador con gran despliegue físico."},
+    {nombre:"Matěj Šín", posicion:"MC", pais:"Chequia", equipo:"Baník Ostrava", anio:"2004", descripcion:"Mediocentro con buena técnica y visión."},
+    {nombre:"Mikel Jauregizar", posicion:"MC", pais:"España", equipo:"", anio:"2003", descripcion:"Jugador versátil con buen manejo del balón."},
+    {nombre:"Leo Sauer", posicion:"ED", pais:"Países Bajos", equipo:"Feyenoord", anio:"2005", descripcion:"Extremo rápido y desequilibrante con buen regate."},
+    {nombre:"Juho Talvitie", posicion:"ED", pais:"Finlandia", equipo:"Heracles Almelo", anio:"2005", descripcion:"Jugador con buen disparo y técnica en banda."},
+    {nombre:"Jesús Vázquez", posicion:"EI", pais:"España", equipo:"Valencia", anio:"2003", descripcion:"Extremo con buena visión y pase en profundidad."},
+    {nombre:"Pablo Gozálbez", posicion:"EI", pais:"España", equipo:"Valencia", anio:"2003", descripcion:"Jugador con buen regate y desborde."},
+    {nombre:"Filippo Missori", posicion:"ED", pais:"Italia", equipo:"Roma", anio:"2004", descripcion:"Extremo con buena velocidad y centros precisos."},
+    {nombre:"Kacper Urbański", posicion:"MC", pais:"Polonia", equipo:"Bologna", anio:"2004", descripcion:"Mediocampista creativo con buen disparo."},
+    {nombre:"Aleksandar Stankov", posicion:"DC", pais:"Finlandia", equipo:"FC Inter Turku", anio:"2003", descripcion:"Delantero con buen remate y físico."},
+    {nombre:"Dumitru Mitu", posicion:"DC", pais:"Rumanía", equipo:"Sepsi OSK", anio:"2004", descripcion:"Delantero con buen movimiento y definición."},
+    {nombre:"Gonzalo Gómez", posicion:"DC", pais:"España", equipo:"Valencia", anio:"2005", descripcion:"Delantero con buen control y disparo."},
+    {nombre:"Tomás Tavares", posicion:"LD", pais:"Portugal", equipo:"Benfica", anio:"2002", descripcion:"Lateral rápido y con buen físico."},
+    {nombre:"Francisco Conceição", posicion:"ED", pais:"Portugal", equipo:"Porto", anio:"2002", descripcion:"Extremo con gran regate y velocidad."}
+  ];
 
-  let jugadoresGlobal = [];
+  // Código de banderas
+  const codes = {
+    Finlandia:'fi', Alemania:'de', Italia:'it', 'Países Bajos':'nl',
+    Dinamarca:'dk', Rumanía:'ro', Chequia:'cz', Inglaterra:'gb-eng',
+    España:'es', Ucrania:'ua', Francia:'fr', Georgia:'ge', Portugal:'pt',
+    Eslovaquia:'sk', Polonia:'pl', Angola:'ao', Turquía:'tr'
+  };
 
-  // Función para insertar jugador
-  async function insertarJugador(jugador) {
-    const { data, error } = await supabase
-      .from('jugadores')
-      .insert([jugador]);
-
-    if (error) {
-      console.error('Error insertando jugador:', error);
-      return { success: false, error };
-    }
-    return { success: true, data };
+  function getFlag(country) {
+    return codes[country] ? `https://flagcdn.com/w40/${codes[country]}.png` : '';
   }
 
-  // Carga jugadores desde Supabase
-  async function cargarJugadores() {
-    const { data, error } = await supabase
-      .from('jugadores')
-      .select('*')
-      .order('posicion')
-      .order('nombre');
-    if (error) {
-      console.error(error);
-      return;
-    }
-    jugadoresGlobal = data || [];
-    renderFilter();
-    renderTabla();
+  // Cargar filtro de países (sin repetir)
+  function cargarFiltro() {
+    const filtro = document.getElementById('filterPais');
+    const paises = [...new Set(jugadores.map(j => j.pais))].sort();
+    paises.forEach(p => {
+      filtro.insertAdjacentHTML('beforeend', `<option value="${p}">${p}</option>`);
+    });
   }
 
-  // Render filtro país
-  function renderFilter() {
-    const sel = document.getElementById('filterPais');
-    sel.innerHTML = '<option value="all">Todos</option>';
-    [...new Set(jugadoresGlobal.map(j => j.pais))]
-      .filter(p => p && p.trim() !== '')
-      .sort()
-      .forEach(p => sel.insertAdjacentHTML('beforeend', `<option value="${p}">${p}</option>`));
-  }
-
-  // Render tabla de jugadores
+  // Renderizar tabla
   function renderTabla() {
-    const sel = document.getElementById('filterPais').value;
-    const txt = document.getElementById('searchNombre').value.toLowerCase();
+    const filtroPais = document.getElementById('filterPais').value;
+    const textoBusqueda = document.getElementById('searchNombre').value.toLowerCase();
     const tbody = document.getElementById('tblJugadores');
     tbody.innerHTML = '';
 
-    const jugadores = jugadoresGlobal
-      .filter(j => (sel === 'all' || j.pais === sel) &&
-                   j.nombre.toLowerCase().includes(txt));
+    const filtrados = jugadores.filter(j => 
+      (filtroPais === 'all' || j.pais === filtroPais) &&
+      j.nombre.toLowerCase().includes(textoBusqueda)
+    );
 
-    if (!jugadores.length) {
-      tbody.innerHTML = '<tr><td colspan="7">No se encontraron jugadores</td></tr>';
+    if (filtrados.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No se encontraron jugadores</td></tr>';
       return;
     }
 
-    jugadores.forEach(j => {
+    filtrados.forEach(j => {
       tbody.insertAdjacentHTML('beforeend', `
-<tr>
-  <td>${j.nombre}</td>
-  <td>${j.posicion}</td>
-  <td><img class="flag" src="${getFlag(j.pais)}" />${j.pais}</td>
-  <td>${j.equipo}</td>
-  <td>${j.anio}</td>
-  <td>${j.descripcion}</td>
-  <td>
-    <button class="action-btn edit-btn" onclick="editar(${j.id})">Editar</button>
-    <button class="action-btn delete-btn" onclick="eliminar(${j.id})">Eliminar</button>
-  </td>
-</tr>`);
+        <tr>
+          <td>${j.nombre}</td>
+          <td>${j.posicion}</td>
+          <td><img class="flag" src="${getFlag(j.pais)}" alt="${j.pais}"/> ${j.pais}</td>
+          <td>${j.equipo}</td>
+          <td>${j.anio}</td>
+          <td class="descripcion">${j.descripcion}</td>
+        </tr>
+      `);
     });
   }
 
-  // Mapea país a código de bandera para mostrar imagen
-  function getFlag(country) {
-    const codes = {
-      Finlandia:'fi', Alemania:'de', Italia:'it', 'Países Bajos':'nl',
-      Dinamarca:'dk', Rumanía:'ro', Chequia:'cz', Inglaterra:'gb-eng',
-      España:'es', Ucrania:'ua', Francia:'fr', Georgia:'ge', Portugal:'pt',
-      Eslovaquia:'sk', Polonia:'pl', Angola:'ao'
-    };
-    return codes[country] ? `https://flagcdn.com/w20/${codes[country]}.png` : '';
-  }
+  // Eventos filtros
+  document.getElementById('filterPais').addEventListener('change', renderTabla);
+  document.getElementById('searchNombre').addEventListener('input', renderTabla);
 
-  // Evento submit del formulario: insertar o actualizar jugador
-  document.getElementById('jugadorForm').onsubmit = async function(e) {
-    e.preventDefault();
-    const id = document.getElementById('jugadorId').value;
-    const jugador = {
-      nombre: document.getElementById('nombre').value.trim(),
-      posicion: document.getElementById('posicion').value.trim(),
-      pais: document.getElementById('pais').value.trim(),
-      equipo: document.getElementById('equipo').value.trim(),
-      anio: document.getElementById('anio').value.trim(),
-      descripcion: document.getElementById('descripcion').value.trim()
-    };
-
-    if (id) {
-      // Actualizar jugador existente
-      const { error } = await supabase.from('jugadores').update(jugador).eq('id', id);
-      if (error) {
-        document.getElementById('msgForm').textContent = '❌ Error actualizando jugador.';
-        console.error(error);
-        return;
-      }
-      document.getElementById('msgForm').textContent = '✏️ Jugador actualizado';
-    } else {
-      // Insertar nuevo jugador
-      const result = await insertarJugador(jugador);
-      if (!result.success) {
-        document.getElementById('msgForm').textContent = '❌ Error insertando jugador.';
-        return;
-      }
-      document.getElementById('msgForm').textContent = '✅ Jugador añadido';
-    }
-
-    document.getElementById('jugadorForm').reset();
-    document.getElementById('jugadorId').value = '';
-    cargarJugadores();
-  };
-
-  // Rellenar formulario para editar jugador
-  window.editar = function(id) {
-    const j = jugadoresGlobal.find(x => x.id === id);
-    if (!j) return;
-    ['jugadorId','nombre','posicion','pais','equipo','anio','descripcion'].forEach(k => {
-      const input = document.getElementById(k);
-      if (input) input.value = j[k] || '';
-    });
-  };
-
-  // Eliminar jugador
-  window.eliminar = async function(id) {
-    if (!confirm('¿Eliminar este jugador?')) return;
-    const { error } = await supabase.from('jugadores').delete().eq('id', id);
-    if (error) {
-      console.error(error);
-      alert('Error eliminando jugador');
-    } else {
-      cargarJugadores();
-    }
-  };
-
-  // Eventos para filtros
-  document.getElementById('filterPais').onchange = renderTabla;
-  document.getElementById('searchNombre').oninput = renderTabla;
-
-  // Carga inicial
-  cargarJugadores();
+  // Inicialización
+  cargarFiltro();
+  renderTabla();
 </script>
+
+</body>
+</html>
