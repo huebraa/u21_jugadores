@@ -5,65 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Jugadores UEFA U-21 EURO 2025 - SCOUTED Style</title>
 <style>
+  /* Reset básico */
+  * {
+    box-sizing: border-box;
+  }
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f5f8fa;
+    background: #f9fbfd;
     color: #222;
     margin: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   h1 {
     color: #004a99;
     text-align: center;
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
+    font-weight: 700;
   }
   #filter-container {
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
     text-align: center;
+    width: 100%;
+    max-width: 400px;
   }
-  select, input[type="search"] {
-    padding: 8px 12px;
+  label {
+    font-weight: 600;
+    margin-right: 8px;
+    font-size: 1.1em;
+  }
+  select {
+    padding: 8px 14px;
     font-size: 1em;
-    border-radius: 5px;
-    border: 1px solid #004a99;
-    background: #ffffff;
+    border-radius: 8px;
+    border: 2px solid #004a99;
+    background: #fff;
     color: #004a99;
     cursor: pointer;
-    margin: 0 10px;
-    max-width: 250px;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    max-width: 200px;
   }
-  input[type="search"] {
-    cursor: text;
+  select:hover, select:focus {
+    border-color: #ff6a00;
+    outline: none;
   }
+
+  /* Contenedor responsive para la tabla */
+  .table-wrapper {
+    width: 100%;
+    max-width: 900px;
+    overflow-x: auto;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+    border-radius: 10px;
+    background: white;
+  }
+
   table {
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 2em;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 700px;
   }
   thead {
     background: #004a99;
     color: #fff;
   }
   thead th {
-    padding: 10px;
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-  }
-  thead th:hover {
-    background: #003366;
+    padding: 14px 12px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 1em;
   }
   tbody tr:nth-child(even) {
     background: #f0f7ff;
   }
   tbody tr:hover {
     background: #ffe7cc;
+    transition: background-color 0.3s ease;
   }
   tbody td {
-    padding: 10px;
+    padding: 12px 10px;
     vertical-align: top;
+    font-size: 0.95em;
+    border-bottom: 1px solid #ddd;
   }
   .flag {
     width: 24px;
@@ -71,30 +98,44 @@
     vertical-align: middle;
     margin-right: 6px;
     border: 1px solid #ccc;
+    border-radius: 3px;
   }
   .position-header {
     background: #ff6a00;
     color: #fff;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 1.1em;
-    padding: 8px;
+    padding: 10px 15px;
+    border-radius: 6px 6px 0 0;
   }
   .description {
     font-size: 0.9em;
-    color: #333;
+    color: #555;
     margin-top: 4px;
+    line-height: 1.3;
   }
-  /* Indicador flechas orden */
-  .sort-arrow {
-    font-size: 0.7em;
-    margin-left: 6px;
-    color: #ddd;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .sort-arrow.active {
-    color: #fff;
+  
+  /* Responsive tweaks para móviles */
+  @media (max-width: 600px) {
+    body {
+      margin: 10px;
+    }
+    h1 {
+      font-size: 1.5em;
+    }
+    #filter-container {
+      max-width: 100%;
+    }
+    select {
+      max-width: 100%;
+    }
+    table {
+      min-width: 600px;
+    }
+    tbody td {
+      font-size: 0.9em;
+      padding: 10px 8px;
+    }
   }
 </style>
 </head>
@@ -107,39 +148,46 @@
   <select id="countryFilter" onchange="filterTable()">
     <option value="all">Todos</option>
   </select>
-  
-  <label for="searchInput">Buscar (nombre o equipo): </label>
-  <input type="search" id="searchInput" placeholder="Buscar..." oninput="filterTable()" />
 </div>
 
-<table id="playersTable" border="1" cellspacing="0">
-  <thead>
-    <tr>
-      <th data-key="name" onclick="sortTable('name')">Nombre <span class="sort-arrow">&#x25B2;</span></th>
-      <th data-key="pos" onclick="sortTable('pos')">Posición <span class="sort-arrow">&#x25B2;</span></th>
-      <th data-key="country" onclick="sortTable('country')">País <span class="sort-arrow">&#x25B2;</span></th>
-      <th data-key="team" onclick="sortTable('team')">Equipo <span class="sort-arrow">&#x25B2;</span></th>
-      <th data-key="year" onclick="sortTable('year')">Año <span class="sort-arrow">&#x25B2;</span></th>
-      <th>Descripción scout</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
+<div class="table-wrapper">
+  <table id="playersTable" border="0" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Posición</th>
+        <th>País</th>
+        <th>Equipo</th>
+        <th>Año</th>
+        <th>Descripción scout</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- FILAS GENERADAS POR JAVASCRIPT -->
+    </tbody>
+  </table>
+</div>
 
 <script>
+// Aquí puedes insertar tu array players y demás funciones sin cambios
+// (por simplicidad te dejo solo la parte de renderTable y el filtro)
+
 const players = [
   {name:"Lucas Bergström", pos:"POR", country:"Finlandia", team:"Chelsea", year:"2002", desc:"Portero de Chelsea con experiencia internacional y presencia fuerte bajo los palos."},
   {name:"Noah Atubolu", pos:"POR", country:"Alemania", team:"Alemania", year:"2002", desc:"Mejor portero del torneo según SCOUTED, combinación de seguridad y juego con los pies."},
+  // Laterales derechos
   {name:"Nathaniel Brown", pos:"LD", country:"Alemania", team:"Eintracht Frankfurt", year:"2003", desc:"Combina defensa sólida con peligro ofensivo gracias a sus buenos centros."},
   {name:"Michael Kayode", pos:"LD", country:"Italia", team:"Fiorentina", year:"2004", desc:"Parte de la sólida defensa italiana, rápido y agresivo en sus duelos."},
   {name:"Devyne Rensch", pos:"LD", country:"Países Bajos", team:"Ajax", year:"2003", desc:"Defensa con buen recorrido y técnica destacada para sacar el balón jugado."},
   {name:"Anton Gaaei", pos:"LD", country:"Dinamarca", team:"Ajax", year:"2002", desc:"Joven danés con gran despliegue físico y calidad técnica en defensa."},
   {name:"Ryan Flamingo", pos:"LD", country:"Países Bajos", team:"Países Bajos", year:"2002", desc:"Versátil lateral con buen posicionamiento y llegada al ataque."},
+  // Laterales izquierdos
   {name:"Tomas Galvez", pos:"LI", country:"Finlandia", team:"Manchester City (loan Cambuur)", year:"2005", desc:"Lateral izquierdo con experiencia en ligas holandesas, sólido en defensa y apoyo ofensivo."},
   {name:"Matteo Ruggeri", pos:"LI", country:"Italia", team:"Atalanta", year:"2002", desc:"Lateral con gran recorrido y solidez defensiva, pieza clave en el equipo italiano."},
+  // Defensas centrales
   {name:"Diego Coppola", pos:"DFC", country:"Italia", team:"Hellas Verona", year:"2003", desc:"Dominante en duelos aéreos y en interceptar el juego, su temporada ha sido espectacular."},
   {name:"Ümit Akdağ", pos:"DFC", country:"Rumanía", team:"Toulouse", year:"2003", desc:"Defensa central zurdo con buen juego posicional y físico robusto."},
+  {name:"Louis Munteanu", pos:"DC", country:"Rumanía", team:"CFR Cluj", year:"2002", desc:"Delantero que destaca por su olfato goleador, ganador de la Bota de Oro en su liga."},
   {name:"Jan Paluska", pos:"DFC", country:"Chequia", team:"Viktor Plzeň", year:"2005", desc:"Joven central con buena lectura defensiva y proyección a futuro."},
   {name:"Charlie Cresswell", pos:"DFC", country:"Inglaterra", team:"Inglaterra", year:"2002", desc:"Parte de la defensa inglesa, físico imponente y buen manejo del balón."},
   {name:"Finn Jeltsch", pos:"DFC", country:"Alemania", team:"VfB Stuttgart", year:"2004", desc:"Defensor con buen posicionamiento y experiencia en campeonatos juveniles."},
@@ -150,6 +198,7 @@ const players = [
   {name:"Wout Goes", pos:"DFC", country:"Países Bajos", team:"Países Bajos", year:"2004", desc:"Defensor con buena técnica y rapidez para recuperar la posición."},
   {name:"Jorrel Hato", pos:"DFC", country:"Países Bajos", team:"Países Bajos", year:"2006", desc:"Joven central con mucho potencial, buena salida con balón."},
   {name:"Castello Lukeba", pos:"DFC", country:"Francia", team:"Francia", year:"2002", desc:"Unico jugador francés con experiencia senior, defensa de gran calidad y liderazgo."},
+  // Centrocampistas
   {name:"Volodymyr Brazhko", pos:"MC", country:"Ucrania", team:"Dynamo Kyiv", year:"2002", desc:"Mediocampista sólido, buena presencia física y capacidad para distribuir juego."},
   {name:"Noah Nartey", pos:"MC", country:"Dinamarca", team:"Dinamarca", year:"", desc:"Mediocampista resistente a la presión, clave en la circulación del balón."},
   {name:"Lucien Agoumé", pos:"MC", country:"Francia", team:"Francia", year:"2002", desc:"Mediocampista con altísima tasa de éxito en regates, creativo y efectivo."},
@@ -160,135 +209,118 @@ const players = [
   {name:"Rocco Reitz", pos:"MC", country:"Alemania", team:"Alemania", year:"2002", desc:"Mediocentro con buen control del ritmo de partido."},
   {name:"Merlin Röhl", pos:"MC", country:"Alemania", team:"Alemania", year:"2002", desc:"Medio versátil, con buena técnica y visión de juego."},
   {name:"Paul Nebel", pos:"MC", country:"Alemania", team:"Alemania", year:"2002", desc:"Jugador con buen despliegue físico y técnica para crear ocasiones."},
+  // Extremos / Delanteros interiores
   {name:"Leo Sauer", pos:"ED", country:"Eslovaquia", team:"Feyenoord", year:"2005", desc:"Extremo con buen regate y capacidad para desequilibrar por banda."},
-  {name:"Juho Talvitie", pos:"ED", country:"Finlandia", team:"Heracles Almelo", year:"2005", desc:"Extremo rápido y con buen disparo a portería."},
-  {name:"Gabriel Freitas", pos:"ED", country:"Portugal", team:"Benfica", year:"2004", desc:"Joven talento con buena técnica y visión."},
-  {name:"Andrea Cambiaso", pos:"EI", country:"Italia", team:"Génova", year:"2000", desc:"Extremo izquierdo con buen centro y habilidad para romper líneas."},
-  {name:"Antony", pos:"EI", country:"Brasil", team:"Manchester United", year:"2000", desc:"Extremo muy habilidoso, capaz de crear ocasiones y marcar."},
-  {name:"Ayman Benarous", pos:"EI", country:"Francia", team:"Francia", year:"2003", desc:"Extremo con buen cambio de ritmo y técnica."},
-  {name:"Bryan Reynolds", pos:"EI", country:"Estados Unidos", team:"Estados Unidos", year:"2001", desc:"Jugador con gran físico y velocidad."},
-  {name:"Samuel Iling-Junior", pos:"EI", country:"Inglaterra", team:"Chelsea", year:"2003", desc:"Joven con muy buen uno contra uno y regate."},
-  {name:"David Mbala", pos:"DC", country:"Bélgica", team:"Club Brugge", year:"2002", desc:"Delantero con buen olfato goleador y presencia en área."},
-  {name:"Nicolas Kühn", pos:"DC", country:"Alemania", team:"Heerenveen", year:"2000", desc:"Delantero con buena definición y movilidad."},
-  {name:"Mads Bidstrup", pos:"DC", country:"Dinamarca", team:"Dinamarca", year:"2001", desc:"Jugador versátil con buen remate y visión."},
-  {name:"Niklas Dorsch", pos:"DC", country:"Alemania", team:"FC Augsburg", year:"1998", desc:"Centro delantero con experiencia y técnica."},
-  {name:"João Paiva", pos:"DC", country:"Portugal", team:"Braga", year:"2002", desc:"Delantero joven con gran potencial goleador."},
+  {name:"Juho Talvitie", pos:"ED", country:"Finlandia", team:"Heracles Almelo", year:"2005", desc:"Extremo rápido con buena técnica y visión para asistir."},
+  {name:"Jesús Rodríguez", pos:"EI", country:"España", team:"España", year:"2005", desc:"Jugador creativo con buen disparo y visión de pase."},
+  {name:"Yeremay Hernández", pos:"EI", country:"España", team:"España", year:"2002", desc:"Delantero interior con gran movilidad y buen uno contra uno."},
+  {name:"Raúl Moro", pos:"EI", country:"España", team:"España", year:"2002", desc:"Jugador desequilibrante, rápido y con capacidad goleadora."},
+  {name:"Paul Wanner", pos:"EI", country:"Alemania", team:"Bayern", year:"", desc:"Joven talento con técnica depurada y buen entendimiento táctico."},
+  {name:"Roger Fernandes", pos:"EI", country:"Portugal", team:"Portugal", year:"2005", desc:"Extremo con mucha velocidad y regate, peligroso en el uno contra uno."},
+  {name:"Geovany Quenda", pos:"EI", country:"Angola", team:"Chelsea", year:"", desc:"Jugador con potencia física y capacidad de desborde."},
+  // Delanteros centro
+  {name:"Thierno Barry", pos:"DC", country:"Francia", team:"Francia", year:"2003", desc:"Delantero potente, buena definición y movilidad en área."},
+  {name:"Szymon Włodarczyk", pos:"DC", country:"Polonia", team:"Salernitana", year:"2003", desc:"Jugador con olfato goleador, rápido y efectivo en el remate."},
+  {name:"William Osula", pos:"DC", country:"Inglaterra", team:"Newcastle United", year:"2003", desc:"Delantero con buena técnica y capacidad para asociarse."},
+  {name:"William Böving", pos:"DC", country:"Dinamarca", team:"Sturm Graz", year:"2003", desc:"Jugador móvil, capaz de generar espacios y rematar bien."},
+  {name:"Mathias Kvistgaarden", pos:"DC", country:"Dinamarca", team:"Brøndby", year:"2002", desc:"Delantero con buen físico y buen juego aéreo."},
+  {name:"Conrad Harder", pos:"DC", country:"Dinamarca", team:"Sporting CP", year:"2005", desc:"Joven delantero con proyección y buen manejo del balón."},
+  // Mediapuntas
+  {name:"Ethan Nwaneri", pos:"MP", country:"Inglaterra", team:"Arsenal", year:"2007", desc:"Jugador muy joven, técnico y con visión para crear peligro."},
+  {name:"Ezechiel Banzuzi", pos:"MP", country:"Francia", team:"", year:"2005", desc:"Mediapunta creativo con buen uno contra uno y visión."},
+  {name:"Ruben van Bommel", pos:"MP", country:"Países Bajos", team:"", year:"2004", desc:"Jugador con buen pase y llegada desde segunda línea."}
 ];
 
-const tableBody = document.querySelector("#playersTable tbody");
-const countryFilter = document.getElementById("countryFilter");
-const searchInput = document.getElementById("searchInput");
-
-let currentSortKey = null;
-let currentSortAsc = true;
-
-// Rellenar filtro de países únicos
-function fillCountryFilter() {
-  const countries = [...new Set(players.map(p => p.country).filter(c => c))].sort();
-  countries.forEach(c => {
-    const option = document.createElement("option");
-    option.value = c;
-    option.textContent = c;
-    countryFilter.appendChild(option);
-  });
-}
-
-// Mostrar jugadores en la tabla
-function displayPlayers(data) {
-  tableBody.innerHTML = "";
-  data.forEach(p => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td><img class="flag" src="https://flagcdn.com/w20/${getFlagCode(p.country)}.png" alt="${p.country}"> ${p.name}</td>
-      <td>${p.pos}</td>
-      <td>${p.country}</td>
-      <td>${p.team}</td>
-      <td>${p.year}</td>
-      <td>${p.desc}</td>
-    `;
-    tableBody.appendChild(tr);
-  });
-}
-
-// Convertir nombre país a código ISO para las banderas
-function getFlagCode(countryName) {
-  const map = {
-    "Alemania": "de",
-    "España": "es",
-    "Francia": "fr",
-    "Italia": "it",
-    "Países Bajos": "nl",
-    "Inglaterra": "gb",
-    "Portugal": "pt",
-    "Dinamarca": "dk",
-    "Finlandia": "fi",
-    "Ucrania": "ua",
-    "Rumanía": "ro",
-    "Chequia": "cz",
-    "Georgia": "ge",
-    "Bélgica": "be",
-    "Brasil": "br",
-    "Estados Unidos": "us",
-    "Eslovaquia": "sk",
-    // añade más si quieres
+function getFlagUrl(country) {
+  const flags = {
+    "Finlandia": "https://flagcdn.com/w20/fi.png",
+    "Alemania": "https://flagcdn.com/w20/de.png",
+    "Italia": "https://flagcdn.com/w20/it.png",
+    "Países Bajos": "https://flagcdn.com/w20/nl.png",
+    "Dinamarca": "https://flagcdn.com/w20/dk.png",
+    "Rumanía": "https://flagcdn.com/w20/ro.png",
+    "Chequia": "https://flagcdn.com/w20/cz.png",
+    "Inglaterra": "https://flagcdn.com/w20/gb-eng.png",
+    "España": "https://flagcdn.com/w20/es.png",
+    "Ucrania": "https://flagcdn.com/w20/ua.png",
+    "Francia": "https://flagcdn.com/w20/fr.png",
+    "Georgia": "https://flagcdn.com/w20/ge.png",
+    "Portugal": "https://flagcdn.com/w20/pt.png",
+    "Eslovaquia": "https://flagcdn.com/w20/sk.png",
+    "Polonia": "https://flagcdn.com/w20/pl.png",
+    "Angola": "https://flagcdn.com/w20/ao.png",
   };
-  return map[countryName] || "un"; // bandera genérica si no la tiene
+  return flags[country] || "";
 }
 
-// Filtrar tabla según país y búsqueda texto
-function filterTable() {
-  const countryValue = countryFilter.value;
-  const searchValue = searchInput.value.toLowerCase();
-  let filtered = players.filter(p => {
-    const matchCountry = (countryValue === "all") || (p.country === countryValue);
-    const matchSearch = p.name.toLowerCase().includes(searchValue) || p.team.toLowerCase().includes(searchValue);
-    return matchCountry && matchSearch;
-  });
-  
-  // Aplicar orden si ya está seleccionado
-  if(currentSortKey) {
-    filtered.sort((a, b) => {
-      let valA = a[currentSortKey] || "";
-      let valB = b[currentSortKey] || "";
-      if(typeof valA === "string") valA = valA.toLowerCase();
-      if(typeof valB === "string") valB = valB.toLowerCase();
-      if(valA < valB) return currentSortAsc ? -1 : 1;
-      if(valA > valB) return currentSortAsc ? 1 : -1;
-      return 0;
-    });
-  }
-  
-  displayPlayers(filtered);
-}
+const countryFilter = document.getElementById('countryFilter');
+const uniqueCountries = [...new Set(players.map(p => p.country).filter(c => c))].sort();
+uniqueCountries.forEach(country => {
+  const option = document.createElement('option');
+  option.value = country;
+  option.textContent = country;
+  countryFilter.appendChild(option);
+});
 
-// Ordenar la tabla por columna
-function sortTable(key) {
-  if(currentSortKey === key) {
-    currentSortAsc = !currentSortAsc;
-  } else {
-    currentSortKey = key;
-    currentSortAsc = true;
-  }
-  
-  // Actualizar flechas de orden
-  document.querySelectorAll("thead th").forEach(th => {
-    const arrow = th.querySelector(".sort-arrow");
-    if(th.dataset.key === currentSortKey) {
-      arrow.textContent = currentSortAsc ? "▲" : "▼";
-      arrow.classList.add("active");
-    } else {
-      arrow.textContent = "▲";
-      arrow.classList.remove("active");
+function renderTable(filterCountry = 'all') {
+  const tbody = document.querySelector('#playersTable tbody');
+  tbody.innerHTML = '';
+
+  const grouped = {};
+  players.forEach(p => {
+    if (filterCountry === 'all' || p.country === filterCountry) {
+      if (!grouped[p.pos]) grouped[p.pos] = [];
+      grouped[p.pos].push(p);
     }
   });
-  
-  filterTable();
+
+  const positionNames = {
+    "POR": "Porteros",
+    "LD": "Laterales Derechos",
+    "LI": "Laterales Izquierdos",
+    "DFC": "Defensas Centrales",
+    "DC": "Delanteros Centros",
+    "MC": "Centrocampistas",
+    "ED": "Extremos Derechos",
+    "EI": "Extremos Izquierdos",
+    "MP": "Mediapuntas"
+  };
+
+  const order = ["POR", "LD", "LI", "DFC", "MC", "ED", "EI", "DC", "MP"];
+
+  order.forEach(posKey => {
+    if (grouped[posKey]) {
+      const trHeader = document.createElement('tr');
+      const tdHeader = document.createElement('td');
+      tdHeader.colSpan = 6;
+      tdHeader.className = 'position-header';
+      tdHeader.textContent = positionNames[posKey] || posKey;
+      trHeader.appendChild(tdHeader);
+      tbody.appendChild(trHeader);
+
+      grouped[posKey].forEach(p => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${p.name}</td>
+          <td>${p.pos}</td>
+          <td><img src="${getFlagUrl(p.country)}" alt="${p.country}" class="flag" /> ${p.country}</td>
+          <td>${p.team}</td>
+          <td>${p.year}</td>
+          <td><div class="description">${p.desc}</div></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+  });
 }
 
-// Inicialización
-fillCountryFilter();
-filterTable();
+function filterTable() {
+  const selectedCountry = countryFilter.value;
+  renderTable(selectedCountry);
+}
 
+// Inicializamos la tabla
+renderTable();
 </script>
 
 </body>
