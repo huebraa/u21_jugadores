@@ -3,50 +3,53 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Jugadores UEFA U-21 EURO 2025 - Por Posición</title>
+<title>Jugadores UEFA U-21 EURO 2025 - SCOUTED Style</title>
 <style>
   body {
-    font-family: Arial, sans-serif;
-    background: #111827;
-    color: #e2e8f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f8fa;
+    color: #222;
     margin: 20px;
   }
   h1 {
+    color: #004a99;
     text-align: center;
-    color: #facc15;
-    margin-bottom: 20px;
+    margin-bottom: 1em;
   }
-  .filter-container {
-    margin-bottom: 20px;
+  #filter-container {
+    margin-bottom: 1em;
     text-align: center;
   }
   select {
-    background: #1f2937;
-    color: #fbbf24;
-    border: 1px solid #fbbf24;
     padding: 8px 12px;
-    font-size: 16px;
-    border-radius: 6px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #004a99;
+    background: #ffffff;
+    color: #004a99;
     cursor: pointer;
   }
   table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 40px;
+    margin-bottom: 2em;
   }
-  th, td {
-    padding: 10px 12px;
-    border-bottom: 1px solid #374151;
+  thead {
+    background: #004a99;
+    color: #fff;
+  }
+  thead th {
+    padding: 10px;
+  }
+  tbody tr:nth-child(even) {
+    background: #f0f7ff;
+  }
+  tbody tr:hover {
+    background: #ffe7cc;
+  }
+  tbody td {
+    padding: 10px;
     vertical-align: top;
-  }
-  th {
-    background: #fbbf24;
-    color: #111827;
-    position: sticky;
-    top: 0;
-  }
-  tr:hover {
-    background-color: #374151;
   }
   .flag {
     width: 24px;
@@ -56,60 +59,35 @@
     border: 1px solid #ccc;
   }
   .position-header {
-    background: #d97706;
-    color: #111827;
-    padding: 8px 12px;
+    background: #ff6a00;
+    color: #fff;
     font-weight: bold;
-    font-size: 18px;
-    margin-top: 40px;
-    border-radius: 6px;
+    font-size: 1.1em;
+    padding: 8px;
   }
   .description {
-    font-size: 14px;
-    color: #fbbf24;
-    margin-top: 6px;
-    max-width: 600px;
+    font-size: 0.9em;
+    color: #333;
+    margin-top: 4px;
   }
 </style>
 </head>
 <body>
 
-<h1>Jugadores UEFA U-21 EURO 2025 - Por Posición</h1>
+<h1>Jugadores UEFA U-21 EURO 2025 - SCOUTED Style</h1>
 
-<div class="filter-container">
+<div id="filter-container">
   <label for="countryFilter">Filtrar por país: </label>
   <select id="countryFilter" onchange="filterTable()">
     <option value="all">Todos</option>
-    <option value="Alemania">🇩🇪 Alemania</option>
-    <option value="Argentina">🇦🇷 Argentina</option>
-    <option value="Austria">🇦🇹 Austria</option>
-    <option value="Bélgica">🇧🇪 Bélgica</option>
-    <option value="Czechia">🇨🇿 República Checa</option>
-    <option value="Dinamarca">🇩🇰 Dinamarca</option>
-    <option value="España">🇪🇸 España</option>
-    <option value="Finlandia">🇫🇮 Finlandia</option>
-    <option value="Francia">🇫🇷 Francia</option>
-    <option value="Georgia">🇬🇪 Georgia</option>
-    <option value="Inglaterra">🏴 Inglaterra</option>
-    <option value="Italia">🇮🇹 Italia</option>
-    <option value="Países Bajos">🇳🇱 Países Bajos</option>
-    <option value="Polonia">🇵🇱 Polonia</option>
-    <option value="Portugal">🇵🇹 Portugal</option>
-    <option value="Rumania">🇷🇴 Rumania</option>
-    <option value="Slovenia">🇸🇮 Eslovenia</option>
-    <option value="Slovakia">🇸🇰 Eslovaquia</option>
-    <option value="Ucrania">🇺🇦 Ucrania</option>
   </select>
 </div>
 
-<div id="playersContainer">
-
-<!-- POR -->
-<div class="position-header">Porteros (POR)</div>
-<table>
+<table id="playersTable" border="1" cellspacing="0">
   <thead>
     <tr>
-      <th>Jugador</th>
+      <th>Nombre</th>
+      <th>Posición</th>
       <th>País</th>
       <th>Equipo</th>
       <th>Año</th>
@@ -117,383 +95,171 @@
     </tr>
   </thead>
   <tbody>
-    <tr data-country="Finlandia">
-      <td>Lucas Bergström</td>
-      <td>🇫🇮 Finlandia</td>
-      <td>Chelsea</td>
-      <td>2002</td>
-      <td class="description">Portero titular de Finlandia, con experiencia internacional y foco en su técnica bajo presión y reflejos.</td>
-    </tr>
-    <tr data-country="Alemania">
-      <td>Noah Atubolu</td>
-      <td>🇩🇪 Alemania</td>
-      <td>Germany</td>
-      <td>2002</td>
-      <td class="description">Considerado el mejor portero del torneo, combina seguridad defensiva con gran juego con los pies.</td>
-    </tr>
+
+  <!-- FILA DE DATOS POR JAVASCRIPT -->
+
   </tbody>
 </table>
-
-<!-- LD -->
-<div class="position-header">Laterales Derechos (LD)</div>
-<table>
-  <thead>
-    <tr>
-      <th>Jugador</th>
-      <th>País</th>
-      <th>Equipo</th>
-      <th>Año</th>
-      <th>Descripción scout</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr data-country="Alemania">
-      <td>Nathaniel Brown</td>
-      <td>🇩🇪 Alemania</td>
-      <td>Eintracht Frankfurt</td>
-      <td>2003</td>
-      <td class="description">Combina defensa sólida con un peligroso aporte ofensivo a base de centros precisos y velocidad.</td>
-    </tr>
-    <tr data-country="Alemania">
-      <td>Michael Kayode</td>
-      <td>🇮🇹 Italia</td>
-      <td>Fiorentina</td>
-      <td>2004</td>
-      <td class="description">Full-back moderno, con presencia física y capacidad para incorporarse al ataque.</td>
-    </tr>
-    <tr data-country="Países Bajos">
-      <td>Devyne Rensch</td>
-      <td>🇳🇱 Países Bajos</td>
-      <td>Ajax</td>
-      <td>2003</td>
-      <td class="description">Defensor con gran capacidad para sumarse al ataque y buena lectura táctica.</td>
-    </tr>
-    <tr data-country="Países Bajos">
-      <td>Anton Gaaei</td>
-      <td>🇩🇰 Dinamarca</td>
-      <td>Ajax</td>
-      <td>2002</td>
-      <td class="description">Lateral rápido y ofensivo, combina buen uno contra uno y proyección ofensiva.</td>
-    </tr>
-    <tr data-country="Países Bajos">
-      <td>Ryan Flamingo</td>
-      <td>🇳🇱 Países Bajos</td>
-      <td>Países Bajos</td>
-      <td>2002</td>
-      <td class="description">Sólido y joven defensa, destaca por su físico y agresividad defensiva.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- LI -->
-<div class="position-header">Laterales Izquierdos (LI)</div>
-<table>
-  <thead>
-    <tr>
-      <th>Jugador</th>
-      <th>País</th>
-      <th>Equipo</th>
-      <th>Año</th>
-      <th>Descripción scout</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr data-country="España">
-      <td>Tomas Galvez</td>
-      <td>🇫🇮 Finlandia</td>
-      <td>Manchester City</td>
-      <td>2005</td>
-      <td class="description">Joven con gran proyección y buen desplazamiento por banda, aporta físico y técnica.</td>
-    </tr>
-    <tr data-country="Italia">
-      <td>Matteo Ruggeri</td>
-      <td>🇮🇹 Italia</td>
-      <td>Atalanta</td>
-      <td>2002</td>
-      <td class="description">Full-back con equilibrio entre defensa y ataque, buena lectura de juego y velocidad.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- DFC -->
-<div class="position-header">Defensas Centrales (DFC)</div>
-<table>
-  <thead>
-    <tr>
-      <th>Jugador</th>
-      <th>País</th>
-      <th>Equipo</th>
-      <th>Año</th>
-      <th>Descripción scout</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr data-country="Italia">
-      <td>Diego Coppola</td>
-      <td>🇮🇹 Italia</td>
-      <td>Hellas Verona</td>
-      <td>2003</td>
-      <td class="description">Dominante en duelos aéreos y en interceptaciones, pieza clave en defensa.</td>
-    </tr>
-    <tr data-country="Turquía">
-      <td>Ümit Akdağ</td>
-      <td>🇷🇴 Rumania</td>
-      <td>Toulouse</td>
-      <td>2003</td>
-      <td class="description">Defensa contundente y fuerte físicamente, buen juego aéreo y posicionamiento.</td>
-    </tr>
-    <tr data-country="Rumania">
-      <td>Charlie Cresswell</td>
-      <td>🏴 Inglaterra</td>
-      <td>Inglaterra</td>
-      <td>2002</td>
-      <td class="description">Jugador con experiencia y sólida técnica defensiva, aporta seguridad.</td>
-    </tr>
-    <tr data-country="España">
-      <td>Cristhian Mosquera</td>
-      <td>🇪🇸 España</td>
-      <td>Valencia</td>
-      <td>2004</td>
-      <td class="description">Joven talento con buena técnica defensiva y salida de balón limpia.</td>
-    </tr>
-    <tr data-country="España">
-      <td>César Tárrega</td>
-      <td>🇪🇸 España</td>
-      <td>Valencia</td>
-      <td>2002</td>
-      <td class="description">Defensa fuerte y con capacidad para anticiparse y sacar el balón jugado.</td>
-    </tr>
-    <tr data-country="República Checa">
-      <td>Václav Paluska</td>
-      <td>🇨🇿 República Checa</td>
-      <td>Viktor Plzeň</td>
-      <td>2005</td>
-      <td class="description">Juvenil con buen posicionamiento y firmeza defensiva.</td>
-    </tr>
-    <!-- Agrega más jugadores aquí siguiendo el patrón -->
-  </tbody>
-</table>
-
-<!-- MC -->
-<div class="position-header">Centrocampistas (MC)</div>
-<table>
-  <thead>
-    <tr>
-      <th>Jugador</th>
-      <th>País</th>
-      <th>Equipo</th>
-      <th>Año</th>
-      <th>Descripción scout</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr data-country="Ucrania">
-      <td>Volodymyr Brazhko</td>
-      <td>🇺🇦 Ucrania</td>
-      <td>Dynamo Kyiv</td>
-      <td>2002</td>
-      <td class="description">Organizador de juego, buen pase y visión táctica.</td>
-    </tr>
-    <tr data-country="Dinamarca">
-      <td>Noah Nartey</td>
-      <td>🇩🇰 Dinamarca</td>
-      <td>Dinamarca</td>
-      <td></td>
-      <td class="description">Centrocampista con buena capacidad de recuperación y despliegue.</td>
-    </tr>
-    <tr data-country="Francia">
-      <td>Lucien Agoumé</td>
-      <td>🇫🇷 Francia</td>
-      <td>Francia</td>
-      <td>2002</td>
-      <td class="description">Jugador con buena técnica, fuerte en el pase y tácticamente inteligente.</td>
-    </tr>
-    <tr data-country="Inglaterra">
-      <td>Hayden Hackney</td>
-      <td>🏴 Inglaterra</td>
-      <td>Inglaterra</td>
-      <td>2003</td>
-      <td class="description">Centrocampista box-to-box con buen despliegue físico y técnica.</td>
-    </tr>
-    <tr data-country="República Checa">
-      <td>Matěj Šín</td>
-      <td>🇨🇿 República Checa</td>
-      <td>Baník Ostrava</td>
-      <td>2004</td>
-      <td class="description">Joven mediocentro con buen control de balón y anticipación.</td>
-    </tr>
-    <tr data-country="Alemania">
-      <td>Rocco Reitz</td>
-      <td>🇩🇪 Alemania</td>
-      <td>Alemania</td>
-      <td>2002</td>
-      <td class="description">Jugador con buena visión y capacidad para distribuir el juego.</td>
-    </tr>
-    <!-- Añade más si quieres -->
-  </tbody>
-</table>
-
-<!-- EI -->
-<div class="position-header">Extremos Izquierdos (EI)</div>
-<table>
-  <thead>
-    <tr>
-      <th>Jugador</th>
-      <th>País</th>
-      <th>Equipo</th>
-      <th>Año</th>
-      <th>Descripción scout</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr data-country="España">
-      <td>Jesús Rodríguez</td>
-      <td>🇪🇸 España</td>
-      <td>Libre</td>
-      <td>2005</td>
-      <td class="description">Extremo rápido y habilidoso, con buen regate y capacidad para asistir.</td>
-    </tr>
-    <tr data-country="España">
-      <td>Yeremay Hernández</td>
-      <td>🇪🇸 España</td>
-      <td>Libre</td>
-      <td>2002</td>
-      <td class="description">Jugador con buen desborde y habilidad para crear ocasiones de gol.</td>
-    </tr>
-    <tr data-country="España">
-      <td>Raúl Moro</td>
-      <td>🇪🇸 España</td>
-      <td>Libre</td>
-      <td>2002</td>
-      <td class="description">Extremo con velocidad y buen disparo desde fuera del área.</td>
-    </tr>
-    <tr data-country="Alemania">
-      <td>Paul Wanner</td>
-      <td>🇩🇪 Alemania</td>
-      <td>Bayern</td>
-      <td></td>
-      <td class="description">Jugador joven con buen control y visión ofensiva.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- ED -->
-<div class="position-header">Extremos Derechos (ED)</div>
-<table>
-  <thead>
-    <tr>
-      <th>Jugador</th>
-      <th>País</th>
-      <th>Equipo</th>
-      <th>Año</th>
-      <th>Descripción scout</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr data-country="Países Bajos">
-      <td>Leo Sauer</td>
-      <td>🇳🇱 Países Bajos</td>
-      <td>Feyenoord</td>
-      <td>2005</td>
-      <td class="description">Extremo con gran habilidad técnica y capacidad para desequilibrar.</td>
-    </tr>
-    <tr data-country="Países Bajos">
-      <td>Juho Talvitie</td>
-      <td>🇫🇮 Finlandia</td>
-      <td>Heracles Almelo</td>
-      <td>2005</td>
-      <td class="description">Joven extremo con buen regate y velocidad.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- DC -->
-<div class="position-header">Delanteros Centros (DC)</div>
-<table>
-  <thead>
-    <tr>
-      <th>Jugador</th>
-      <th>País</th>
-      <th>Equipo</th>
-      <th>Año</th>
-      <th>Descripción scout</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr data-country="Rumania">
-      <td>Louis Munteanu</td>
-      <td>🇷🇴 Rumania</td>
-      <td>CFR Cluj</td>
-      <td>2002</td>
-      <td class="description">Delantero potente con buena definición dentro del área.</td>
-    </tr>
-    <tr data-country="Francia">
-      <td>Thierno Barry</td>
-      <td>🇫🇷 Francia</td>
-      <td>Francia</td>
-      <td>2003</td>
-      <td class="description">Delantero con buen físico y remate.</td>
-    </tr>
-    <tr data-country="Polonia">
-      <td>Szymon Włodarczyk</td>
-      <td>🇵🇱 Polonia</td>
-      <td>Salernitana</td>
-      <td>2003</td>
-      <td class="description">Jugador con olfato goleador y buen posicionamiento.</td>
-    </tr>
-    <!-- Añade más -->
-  </tbody>
-</table>
-
-<!-- MP -->
-<div class="position-header">Mediapuntas (MP)</div>
-<table>
-  <thead>
-    <tr>
-      <th>Jugador</th>
-      <th>País</th>
-      <th>Equipo</th>
-      <th>Año</th>
-      <th>Descripción scout</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr data-country="Inglaterra">
-      <td>Ethan Nwaneri</td>
-      <td>🏴 Inglaterra</td>
-      <td>Arsenal</td>
-      <td>2007</td>
-      <td class="description">Jugador muy joven con gran técnica y visión de juego.</td>
-    </tr>
-    <tr data-country="Francia">
-      <td>Ezechiel Banzuzi</td>
-      <td>🇫🇷 Francia</td>
-      <td>Libre</td>
-      <td>2005</td>
-      <td class="description">Mediapunta con buena conducción y capacidad para asistir.</td>
-    </tr>
-  </tbody>
-</table>
-
-</div>
 
 <script>
-function filterTable() {
-  const filter = document.getElementById('countryFilter').value;
-  const rows = document.querySelectorAll('tbody tr');
-  rows.forEach(row => {
-    if(filter === 'all') {
-      row.style.display = '';
-    } else {
-      const country = row.getAttribute('data-country');
-      if(country === filter) {
-        row.style.display = '';
-      } else {
-        row.style.display = 'none';
-      }
+// Datos de jugadores
+const players = [
+  // Porteros
+  {name:"Lucas Bergström", pos:"POR", country:"Finlandia", team:"Chelsea", year:"2002", desc:"Portero de Chelsea con experiencia internacional y presencia fuerte bajo los palos."},
+  {name:"Noah Atubolu", pos:"POR", country:"Alemania", team:"Alemania", year:"2002", desc:"Mejor portero del torneo según SCOUTED, combinación de seguridad y juego con los pies."},
+  // Laterales derechos
+  {name:"Nathaniel Brown", pos:"LD", country:"Alemania", team:"Eintracht Frankfurt", year:"2003", desc:"Combina defensa sólida con peligro ofensivo gracias a sus buenos centros."},
+  {name:"Michael Kayode", pos:"LD", country:"Italia", team:"Fiorentina", year:"2004", desc:"Parte de la sólida defensa italiana, rápido y agresivo en sus duelos."},
+  {name:"Devyne Rensch", pos:"LD", country:"Países Bajos", team:"Ajax", year:"2003", desc:"Defensa con buen recorrido y técnica destacada para sacar el balón jugado."},
+  {name:"Anton Gaaei", pos:"LD", country:"Dinamarca", team:"Ajax", year:"2002", desc:"Joven danés con gran despliegue físico y calidad técnica en defensa."},
+  {name:"Ryan Flamingo", pos:"LD", country:"Países Bajos", team:"Países Bajos", year:"2002", desc:"Versátil lateral con buen posicionamiento y llegada al ataque."},
+  // Laterales izquierdos
+  {name:"Tomas Galvez", pos:"LI", country:"Finlandia", team:"Manchester City (loan Cambuur)", year:"2005", desc:"Lateral izquierdo con experiencia en ligas holandesas, sólido en defensa y apoyo ofensivo."},
+  {name:"Matteo Ruggeri", pos:"LI", country:"Italia", team:"Atalanta", year:"2002", desc:"Lateral con gran recorrido y solidez defensiva, pieza clave en el equipo italiano."},
+  // Defensas centrales
+  {name:"Diego Coppola", pos:"DFC", country:"Italia", team:"Hellas Verona", year:"2003", desc:"Dominante en duelos aéreos y en interceptar el juego, su temporada ha sido espectacular."},
+  {name:"Ümit Akdağ", pos:"DFC", country:"Rumanía", team:"Toulouse", year:"2003", desc:"Defensa central zurdo con buen juego posicional y físico robusto."},
+  {name:"Louis Munteanu", pos:"DC", country:"Rumanía", team:"CFR Cluj", year:"2002", desc:"Delantero que destaca por su olfato goleador, ganador de la Bota de Oro en su liga."},
+  {name:"Jan Paluska", pos:"DFC", country:"Chequia", team:"Viktor Plzeň", year:"2005", desc:"Joven central con buena lectura defensiva y proyección a futuro."},
+  {name:"Charlie Cresswell", pos:"DFC", country:"Inglaterra", team:"Inglaterra", year:"2002", desc:"Parte de la defensa inglesa, físico imponente y buen manejo del balón."},
+  {name:"Finn Jeltsch", pos:"DFC", country:"Alemania", team:"VfB Stuttgart", year:"2004", desc:"Defensor con buen posicionamiento y experiencia en campeonatos juveniles."},
+  {name:"Nathan Zézé", pos:"DFC", country:"Francia", team:"", year:"", desc:"Potencial para Premier League, defensor con buen juego aéreo y anticipación."},
+  {name:"Cristhian Mosquera", pos:"DFC", country:"España", team:"Valencia", year:"2004", desc:"Joven talento defensivo con técnica depurada y buen desplazamiento."},
+  {name:"César Tárrega", pos:"DFC", country:"España", team:"Valencia", year:"2002", desc:"Compañero de Mosquera, defensa con buen posicionamiento y anticipación."},
+  {name:"Taras Mykhavko", pos:"DFC", country:"Ucrania", team:"Dynamo Kyiv", year:"2005", desc:"Destacado joven central con experiencia en Europa League y Premier Liga."},
+  {name:"Wout Goes", pos:"DFC", country:"Países Bajos", team:"Países Bajos", year:"2004", desc:"Defensor con buena técnica y rapidez para recuperar la posición."},
+  {name:"Jorrel Hato", pos:"DFC", country:"Países Bajos", team:"Países Bajos", year:"2006", desc:"Joven central con mucho potencial, buena salida con balón."},
+  {name:"Castello Lukeba", pos:"DFC", country:"Francia", team:"Francia", year:"2002", desc:"Unico jugador francés con experiencia senior, defensa de gran calidad y liderazgo."},
+  // Centrocampistas
+  {name:"Volodymyr Brazhko", pos:"MC", country:"Ucrania", team:"Dynamo Kyiv", year:"2002", desc:"Mediocampista sólido, buena presencia física y capacidad para distribuir juego."},
+  {name:"Noah Nartey", pos:"MC", country:"Dinamarca", team:"Dinamarca", year:"", desc:"Mediocampista resistente a la presión, clave en la circulación del balón."},
+  {name:"Lucien Agoumé", pos:"MC", country:"Francia", team:"Francia", year:"2002", desc:"Mediocampista con altísima tasa de éxito en regates, creativo y efectivo."},
+  {name:"Hayden Hackney", pos:"MC", country:"Inglaterra", team:"Inglaterra", year:"2003", desc:"Experto en progresión del balón, tiene visión y dinamismo para dominar el centro del campo."},
+  {name:"Matěj Šín", pos:"MC", country:"Chequia", team:"Baník Ostrava", year:"2004", desc:"Centrocampista con experiencia senior y buena técnica."},
+  {name:"Mikel Jauregizar", pos:"MC", country:"España", team:"España", year:"2003", desc:"Medio con buen pie y capacidad para iniciar jugadas ofensivas."},
+  {name:"Gabriel Sigua", pos:"MC", country:"Georgia", team:"FC Basel", year:"2005", desc:"Joven con proyección, destacado físicamente y con experiencia internacional."},
+  {name:"Rocco Reitz", pos:"MC", country:"Alemania", team:"Alemania", year:"2002", desc:"Mediocentro con buen control del ritmo de partido."},
+  {name:"Merlin Röhl", pos:"MC", country:"Alemania", team:"Alemania", year:"2002", desc:"Medio versátil, con buena técnica y visión de juego."},
+  {name:"Paul Nebel", pos:"MC", country:"Alemania", team:"Alemania", year:"2002", desc:"Jugador con buen despliegue físico y técnica para crear ocasiones."},
+  // Extremos / Delanteros interiores
+  {name:"Leo Sauer", pos:"ED", country:"Eslovaquia", team:"Feyenoord", year:"2005", desc:"Extremo con buen regate y capacidad para desequilibrar por banda."},
+  {name:"Juho Talvitie", pos:"ED", country:"Finlandia", team:"Heracles Almelo", year:"2005", desc:"Extremo rápido con buena técnica y visión para asistir."},
+  {name:"Jesús Rodríguez", pos:"EI", country:"España", team:"España", year:"2005", desc:"Jugador creativo con buen disparo y visión de pase."},
+  {name:"Yeremay Hernández", pos:"EI", country:"España", team:"España", year:"2002", desc:"Delantero interior con gran movilidad y buen uno contra uno."},
+  {name:"Raúl Moro", pos:"EI", country:"España", team:"España", year:"2002", desc:"Jugador desequilibrante, rápido y con capacidad goleadora."},
+  {name:"Paul Wanner", pos:"EI", country:"Alemania", team:"Bayern", year:"", desc:"Joven talento con técnica depurada y buen entendimiento táctico."},
+  {name:"Roger Fernandes", pos:"EI", country:"Portugal", team:"Portugal", year:"2005", desc:"Extremo con mucha velocidad y regate, peligroso en el uno contra uno."},
+  {name:"Geovany Quenda", pos:"EI", country:"Angola", team:"Chelsea", year:"", desc:"Jugador con potencia física y capacidad de desborde."},
+  // Delanteros centro
+  {name:"Thierno Barry", pos:"DC", country:"Francia", team:"Francia", year:"2003", desc:"Delantero potente, buena definición y movilidad en área."},
+  {name:"Szymon Włodarczyk", pos:"DC", country:"Polonia", team:"Salernitana", year:"2003", desc:"Jugador con olfato goleador, rápido y efectivo en el remate."},
+  {name:"William Osula", pos:"DC", country:"Inglaterra", team:"Newcastle United", year:"2003", desc:"Delantero con buena técnica y capacidad para asociarse."},
+  {name:"William Böving", pos:"DC", country:"Dinamarca", team:"Sturm Graz", year:"2003", desc:"Jugador móvil, capaz de generar espacios y rematar bien."},
+  {name:"Mathias Kvistgaarden", pos:"DC", country:"Dinamarca", team:"Brøndby", year:"2002", desc:"Delantero con buen físico y buen juego aéreo."},
+  {name:"Conrad Harder", pos:"DC", country:"Dinamarca", team:"Sporting CP", year:"2005", desc:"Joven delantero con proyección y buen manejo del balón."},
+  // Mediapuntas
+  {name:"Ethan Nwaneri", pos:"MP", country:"Inglaterra", team:"Arsenal", year:"2007", desc:"Jugador muy joven, técnico y con visión para crear peligro."},
+  {name:"Ezechiel Banzuzi", pos:"MP", country:"Francia", team:"", year:"2005", desc:"Mediapunta creativo con buen uno contra uno y visión."},
+  {name:"Ruben van Bommel", pos:"MP", country:"Países Bajos", team:"", year:"2004", desc:"Jugador con buen pase y llegada desde segunda línea."}
+];
+
+// Función para obtener la URL de la bandera según el país
+function getFlagUrl(country) {
+  const flags = {
+    "Finlandia": "https://flagcdn.com/w20/fi.png",
+    "Alemania": "https://flagcdn.com/w20/de.png",
+    "Italia": "https://flagcdn.com/w20/it.png",
+    "Países Bajos": "https://flagcdn.com/w20/nl.png",
+    "Dinamarca": "https://flagcdn.com/w20/dk.png",
+    "Rumanía": "https://flagcdn.com/w20/ro.png",
+    "Chequia": "https://flagcdn.com/w20/cz.png",
+    "Inglaterra": "https://flagcdn.com/w20/gb-eng.png",
+    "España": "https://flagcdn.com/w20/es.png",
+    "Ucrania": "https://flagcdn.com/w20/ua.png",
+    "Francia": "https://flagcdn.com/w20/fr.png",
+    "Georgia": "https://flagcdn.com/w20/ge.png",
+    "Portugal": "https://flagcdn.com/w20/pt.png",
+    "Eslovaquia": "https://flagcdn.com/w20/sk.png",
+    "Polonia": "https://flagcdn.com/w20/pl.png",
+    "Angola": "https://flagcdn.com/w20/ao.png",
+  };
+  return flags[country] || "";
+}
+
+// Poblar el filtro de países
+const countryFilter = document.getElementById('countryFilter');
+const uniqueCountries = [...new Set(players.map(p => p.country).filter(c => c))].sort();
+uniqueCountries.forEach(country => {
+  const option = document.createElement('option');
+  option.value = country;
+  option.textContent = country;
+  countryFilter.appendChild(option);
+});
+
+// Renderizar tabla agrupando por posición
+function renderTable(filterCountry = 'all') {
+  const tbody = document.querySelector('#playersTable tbody');
+  tbody.innerHTML = '';
+  // Agrupar por posición
+  const grouped = {};
+  players.forEach(p => {
+    if (filterCountry === 'all' || p.country === filterCountry) {
+      if (!grouped[p.pos]) grouped[p.pos] = [];
+      grouped[p.pos].push(p);
+    }
+  });
+  const positionNames = {
+    "POR": "Porteros",
+    "LD": "Laterales Derechos",
+    "LI": "Laterales Izquierdos",
+    "DFC": "Defensas Centrales",
+    "DC": "Delanteros Centros",
+    "MC": "Centrocampistas",
+    "ED": "Extremos Derechos",
+    "EI": "Extremos Izquierdos",
+    "MP": "Mediapuntas"
+  };
+
+  // Orden de posiciones para mostrar
+  const order = ["POR", "LD", "LI", "DFC", "MC", "ED", "EI", "DC", "MP"];
+
+  order.forEach(posKey => {
+    if (grouped[posKey]) {
+      // Header fila para posición
+      const trHeader = document.createElement('tr');
+      const tdHeader = document.createElement('td');
+      tdHeader.colSpan = 6;
+      tdHeader.className = 'position-header';
+      tdHeader.textContent = positionNames[posKey] || posKey;
+      trHeader.appendChild(tdHeader);
+      tbody.appendChild(trHeader);
+
+      // Filas de jugadores
+      grouped[posKey].forEach(p => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${p.name}</td>
+          <td>${p.pos}</td>
+          <td><img src="${getFlagUrl(p.country)}" alt="${p.country}" class="flag" /> ${p.country}</td>
+          <td>${p.team}</td>
+          <td>${p.year}</td>
+          <td><div class="description">${p.desc}</div></td>
+        `;
+        tbody.appendChild(tr);
+      });
     }
   });
 }
+
+// Filtrar tabla según país
+function filterTable() {
+  const selectedCountry = countryFilter.value;
+  renderTable(selectedCountry);
+}
+
+// Inicializar tabla y filtro
+renderTable();
+
 </script>
 
 </body>
