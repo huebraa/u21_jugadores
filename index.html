@@ -3,591 +3,497 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Jugadores por Posición - UEFA U-21 EURO 2025</title>
+<title>Jugadores UEFA U-21 EURO 2025 - Por Posición</title>
 <style>
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f9f9f9;
-    color: #333;
+    font-family: Arial, sans-serif;
+    background: #111827;
+    color: #e2e8f0;
     margin: 20px;
-    line-height: 1.5;
   }
   h1 {
     text-align: center;
-    color: #444;
+    color: #facc15;
     margin-bottom: 20px;
   }
-  #filter-container {
-    max-width: 400px;
-    margin: 0 auto 40px;
+  .filter-container {
+    margin-bottom: 20px;
     text-align: center;
   }
-  #country-filter {
+  select {
+    background: #1f2937;
+    color: #fbbf24;
+    border: 1px solid #fbbf24;
     padding: 8px 12px;
-    font-size: 1rem;
+    font-size: 16px;
     border-radius: 6px;
-    border: 1px solid #ccc;
-    width: 100%;
-    max-width: 300px;
-  }
-  section.position-group {
-    margin-bottom: 40px;
-    background: #fff;
-    padding: 20px 25px;
-    border-radius: 8px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-  }
-  section.position-group h2 {
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 8px;
-    color: #555;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
+    cursor: pointer;
   }
   table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
+    margin-bottom: 40px;
   }
-  thead tr {
-    background: #eaeaea;
-  }
-  thead th {
-    text-align: left;
+  th, td {
     padding: 10px 12px;
-    font-weight: 600;
-    color: #666;
+    border-bottom: 1px solid #374151;
+    vertical-align: top;
   }
-  tbody tr:nth-child(even) {
-    background: #f7f7f7;
+  th {
+    background: #fbbf24;
+    color: #111827;
+    position: sticky;
+    top: 0;
   }
-  tbody td {
-    padding: 8px 12px;
-    vertical-align: middle;
-    overflow-wrap: break-word;
+  tr:hover {
+    background-color: #374151;
   }
   .flag {
-    width: 22px;
-    height: 15px;
+    width: 24px;
+    height: 16px;
     vertical-align: middle;
-    margin-right: 8px;
-    border-radius: 3px;
-    box-shadow: 0 0 1px rgba(0,0,0,0.15);
+    margin-right: 6px;
+    border: 1px solid #ccc;
   }
-  @media (max-width: 600px) {
-    table, thead, tbody, th, td, tr {
-      display: block;
-    }
-    thead tr {
-      display: none;
-    }
-    tbody td {
-      padding: 8px 5px;
-      border-bottom: 1px solid #ddd;
-      position: relative;
-      padding-left: 40%;
-      white-space: normal;
-      text-align: left;
-    }
-    tbody td:before {
-      position: absolute;
-      top: 8px;
-      left: 10px;
-      width: 35%;
-      white-space: nowrap;
-      font-weight: 600;
-      color: #555;
-      content: attr(data-label);
-    }
+  .position-header {
+    background: #d97706;
+    color: #111827;
+    padding: 8px 12px;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 40px;
+    border-radius: 6px;
+  }
+  .description {
+    font-size: 14px;
+    color: #fbbf24;
+    margin-top: 6px;
+    max-width: 600px;
   }
 </style>
 </head>
 <body>
 
-<h1>Jugadores por Posición - UEFA U-21 EURO 2025</h1>
+<h1>Jugadores UEFA U-21 EURO 2025 - Por Posición</h1>
 
-<div id="filter-container">
-  <label for="country-filter"><strong>Filtrar por país:</strong></label><br />
-  <select id="country-filter">
-    <option value="all">Todos los países</option>
-    <option value="Finlandia">Finlandia</option>
-    <option value="Alemania">Alemania</option>
-    <option value="Italia">Italia</option>
-    <option value="Rumania">Rumania</option>
-    <option value="República Checa">República Checa</option>
-    <option value="Inglaterra">Inglaterra</option>
-    <option value="Francia">Francia</option>
-    <option value="España">España</option>
-    <option value="Ucrania">Ucrania</option>
-    <option value="Países Bajos">Países Bajos</option>
-    <option value="Dinamarca">Dinamarca</option>
-    <option value="Suiza">Suiza</option>
-    <option value="Portugal">Portugal</option>
+<div class="filter-container">
+  <label for="countryFilter">Filtrar por país: </label>
+  <select id="countryFilter" onchange="filterTable()">
+    <option value="all">Todos</option>
+    <option value="Alemania">🇩🇪 Alemania</option>
+    <option value="Argentina">🇦🇷 Argentina</option>
+    <option value="Austria">🇦🇹 Austria</option>
+    <option value="Bélgica">🇧🇪 Bélgica</option>
+    <option value="Czechia">🇨🇿 República Checa</option>
+    <option value="Dinamarca">🇩🇰 Dinamarca</option>
+    <option value="España">🇪🇸 España</option>
+    <option value="Finlandia">🇫🇮 Finlandia</option>
+    <option value="Francia">🇫🇷 Francia</option>
+    <option value="Georgia">🇬🇪 Georgia</option>
+    <option value="Inglaterra">🏴 Inglaterra</option>
+    <option value="Italia">🇮🇹 Italia</option>
+    <option value="Países Bajos">🇳🇱 Países Bajos</option>
+    <option value="Polonia">🇵🇱 Polonia</option>
+    <option value="Portugal">🇵🇹 Portugal</option>
+    <option value="Rumania">🇷🇴 Rumania</option>
+    <option value="Slovenia">🇸🇮 Eslovenia</option>
+    <option value="Slovakia">🇸🇰 Eslovaquia</option>
+    <option value="Ucrania">🇺🇦 Ucrania</option>
   </select>
 </div>
 
-<!-- PORTEROS -->
-<section class="position-group">
-  <h2>Porteros (POR)</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>País</th>
-        <th>Equipo</th>
-        <th>Año</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr data-country="Finlandia">
-        <td>Lucas Bergström</td>
-        <td><img src="https://flagcdn.com/w20/fi.png" alt="Finlandia" class="flag" />Finlandia</td>
-        <td>Chelsea</td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="Alemania">
-        <td>Noah Atubolu</td>
-        <td><img src="https://flagcdn.com/w20/de.png" alt="Alemania" class="flag" />Alemania</td>
-        <td>Alemania</td>
-        <td>2002</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+<div id="playersContainer">
 
-<!-- DEFENSAS -->
-<section class="position-group">
-  <h2>Defensas (DFC, DC, LD, LI)</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>País</th>
-        <th>Equipo</th>
-        <th>Año</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr data-country="Italia">
-        <td>Matteo Ruggeri</td>
-        <td><img src="https://flagcdn.com/w20/it.png" alt="Italia" class="flag" />Italia</td>
-        <td>Atalanta</td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="Italia">
-        <td>Michael Kayode</td>
-        <td><img src="https://flagcdn.com/w20/it.png" alt="Italia" class="flag" />Italia</td>
-        <td>Fiorentina</td>
-        <td>2004</td>
-      </tr>
-      <tr data-country="Italia">
-        <td>Diego Coppola</td>
-        <td><img src="https://flagcdn.com/w20/it.png" alt="Italia" class="flag" />Italia</td>
-        <td>Hellas Verona</td>
-        <td>2003</td>
-      </tr>
-      <tr data-country="Rumania">
-        <td>Ümit Akdağ</td>
-        <td><img src="https://flagcdn.com/w20/ro.png" alt="Rumania" class="flag" />Rumania</td>
-        <td>Toulouse</td>
-        <td>2003</td>
-      </tr>
-      <tr data-country="Rumania">
-        <td>Louis Munteanu</td>
-        <td><img src="https://flagcdn.com/w20/ro.png" alt="Rumania" class="flag" />Rumania</td>
-        <td>CFR Cluj</td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="República Checa">
-        <td>Jan Paluska</td>
-        <td><img src="https://flagcdn.com/w20/cz.png" alt="República Checa" class="flag" />República Checa</td>
-        <td>Viktor Plzeň</td>
-        <td>2005</td>
-      </tr>
-      <tr data-country="Inglaterra">
-        <td>Charlie Cresswell</td>
-        <td><img src="https://flagcdn.com/w20/gb.png" alt="Inglaterra" class="flag" />Inglaterra</td>
-        <td>Inglaterra</td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="Alemania">
-        <td>Finn Jeltsch</td>
-        <td><img src="https://flagcdn.com/w20/de.png" alt="Alemania" class="flag" />Alemania</td>
-        <td>VfB Stuttgart</td>
-        <td></td>
-      </tr>
-      <tr data-country="Francia">
-        <td>Nathan Zézé</td>
-        <td><img src="https://flagcdn.com/w20/fr.png" alt="Francia" class="flag" />Francia</td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr data-country="España">
-        <td>Cristhian Mosquera</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td>Valencia</td>
-        <td>2004</td>
-      </tr>
-      <tr data-country="España">
-        <td>César Tárrega</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td>Valencia</td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="Ucrania">
-        <td>Taras Mykhavko</td>
-        <td><img src="https://flagcdn.com/w20/ua.png" alt="Ucrania" class="flag" />Ucrania</td>
-        <td>Dynamo Kyiv</td>
-        <td>2005</td>
-      </tr>
-      <tr data-country="Países Bajos">
-        <td>Ryan Flamingo</td>
-        <td><img src="https://flagcdn.com/w20/nl.png" alt="Países Bajos" class="flag" />Países Bajos</td>
-        <td>Países Bajos</td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="Países Bajos">
-        <td>Wout Goes</td>
-        <td><img src="https://flagcdn.com/w20/nl.png" alt="Países Bajos" class="flag" />Países Bajos</td>
-        <td>Países Bajos</td>
-        <td>2004</td>
-      </tr>
-      <tr data-country="Países Bajos">
-        <td>Jorrel Hato</td>
-        <td><img src="https://flagcdn.com/w20/nl.png" alt="Países Bajos" class="flag" />Países Bajos</td>
-        <td>Países Bajos</td>
-        <td>2006</td>
-      </tr>
-      <tr data-country="Francia">
-        <td>Castello Lukeba</td>
-        <td><img src="https://flagcdn.com/w20/fr.png" alt="Francia" class="flag" />Francia</td>
-        <td>Francia</td>
-        <td>2002</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+<!-- POR -->
+<div class="position-header">Porteros (POR)</div>
+<table>
+  <thead>
+    <tr>
+      <th>Jugador</th>
+      <th>País</th>
+      <th>Equipo</th>
+      <th>Año</th>
+      <th>Descripción scout</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-country="Finlandia">
+      <td>Lucas Bergström</td>
+      <td>🇫🇮 Finlandia</td>
+      <td>Chelsea</td>
+      <td>2002</td>
+      <td class="description">Portero titular de Finlandia, con experiencia internacional y foco en su técnica bajo presión y reflejos.</td>
+    </tr>
+    <tr data-country="Alemania">
+      <td>Noah Atubolu</td>
+      <td>🇩🇪 Alemania</td>
+      <td>Germany</td>
+      <td>2002</td>
+      <td class="description">Considerado el mejor portero del torneo, combina seguridad defensiva con gran juego con los pies.</td>
+    </tr>
+  </tbody>
+</table>
 
-<!-- CENTROCAMPISTAS -->
-<section class="position-group">
-  <h2>Centrocampistas (MC, MP)</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>País</th>
-        <th>Equipo</th>
-        <th>Año</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr data-country="Ucrania">
-        <td>Volodymyr Brazhko</td>
-        <td><img src="https://flagcdn.com/w20/ua.png" alt="Ucrania" class="flag" />Ucrania</td>
-        <td>Dynamo Kyiv</td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="Dinamarca">
-        <td>Noah Nartey</td>
-        <td><img src="https://flagcdn.com/w20/dk.png" alt="Dinamarca" class="flag" />Dinamarca</td>
-        <td>Dinamarca</td>
-        <td></td>
-      </tr>
-      <tr data-country="Francia">
-        <td>Lucien Agoumé</td>
-        <td><img src="https://flagcdn.com/w20/fr.png" alt="Francia" class="flag" />Francia</td>
-        <td>Francia</td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="Inglaterra">
-        <td>Hayden Hackney</td>
-        <td><img src="https://flagcdn.com/w20/gb.png" alt="Inglaterra" class="flag" />Inglaterra</td>
-        <td>Inglaterra</td>
-        <td>2003</td>
-      </tr>
-      <tr data-country="República Checa">
-        <td>Matěj Šín</td>
-        <td><img src="https://flagcdn.com/w20/cz.png" alt="República Checa" class="flag" />República Checa</td>
-        <td>Baník Ostrava</td>
-        <td>2004</td>
-      </tr>
-      <tr data-country="España">
-        <td>Mikel Jauregizar</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2003</td>
-      </tr>
-      <tr data-country="Países Bajos">
-        <td>Gabriel Sigua</td>
-        <td><img src="https://flagcdn.com/w20/ch.png" alt="Suiza" class="flag" />Suiza</td>
-        <td>FC Basel</td>
-        <td>2005</td>
-      </tr>
-      <tr data-country="Alemania">
-        <td>Rocco Reitz</td>
-        <td><img src="https://flagcdn.com/w20/de.png" alt="Alemania" class="flag" />Alemania</td>
-        <td>Alemania</td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="Alemania">
-        <td>Merlin Röhl</td>
-        <td><img src="https://flagcdn.com/w20/de.png" alt="Alemania" class="flag" />Alemania</td>
-        <td>Alemania</td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="Alemania">
-        <td>Paul Nebel</td>
-        <td><img src="https://flagcdn.com/w20/de.png" alt="Alemania" class="flag" />Alemania</td>
-        <td>Alemania</td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="Francia">
-        <td>Lucien Agoumé</td>
-        <td><img src="https://flagcdn.com/w20/fr.png" alt="Francia" class="flag" />Francia</td>
-        <td>Francia</td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="Francia">
-        <td>Castello Lukeba</td>
-        <td><img src="https://flagcdn.com/w20/fr.png" alt="Francia" class="flag" />Francia</td>
-        <td>Francia</td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="Francia">
-        <td>Thierno Barry</td>
-        <td><img src="https://flagcdn.com/w20/fr.png" alt="Francia" class="flag" />Francia</td>
-        <td>Francia</td>
-        <td>2003</td>
-      </tr>
-      <tr data-country="Polonia">
-        <td>Szymon Włodarczyk</td>
-        <td><img src="https://flagcdn.com/w20/pl.png" alt="Polonia" class="flag" />Polonia</td>
-        <td>Salernitana</td>
-        <td>2003</td>
-      </tr>
-      <tr data-country="Inglaterra">
-        <td>William Osula</td>
-        <td><img src="https://flagcdn.com/w20/gb.png" alt="Inglaterra" class="flag" />Inglaterra</td>
-        <td>Newcastle United</td>
-        <td>2003</td>
-      </tr>
-      <tr data-country="Dinamarca">
-        <td>William Böving</td>
-        <td><img src="https://flagcdn.com/w20/dk.png" alt="Dinamarca" class="flag" />Dinamarca</td>
-        <td>Sturm Graz</td>
-        <td>2003</td>
-      </tr>
-      <tr data-country="Dinamarca">
-        <td>Mathias Kvistgaarden</td>
-        <td><img src="https://flagcdn.com/w20/dk.png" alt="Dinamarca" class="flag" />Dinamarca</td>
-        <td>Brøndby</td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="Dinamarca">
-        <td>Conrad Harder</td>
-        <td><img src="https://flagcdn.com/w20/dk.png" alt="Dinamarca" class="flag" />Dinamarca</td>
-        <td>Sporting CP</td>
-        <td>2005</td>
-      </tr>
-      <tr data-country="Inglaterra">
-        <td>Ethan Nwaneri</td>
-        <td><img src="https://flagcdn.com/w20/gb.png" alt="Inglaterra" class="flag" />Inglaterra</td>
-        <td>Arsenal</td>
-        <td>2007</td>
-      </tr>
-      <tr data-country="Francia">
-        <td>Ezechiel Banzuzi</td>
-        <td><img src="https://flagcdn.com/w20/fr.png" alt="Francia" class="flag" />Francia</td>
-        <td></td>
-        <td>2005</td>
-      </tr>
-      <tr data-country="Países Bajos">
-        <td>Ruben van Bommel</td>
-        <td><img src="https://flagcdn.com/w20/nl.png" alt="Países Bajos" class="flag" />Países Bajos</td>
-        <td></td>
-        <td>2004</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+<!-- LD -->
+<div class="position-header">Laterales Derechos (LD)</div>
+<table>
+  <thead>
+    <tr>
+      <th>Jugador</th>
+      <th>País</th>
+      <th>Equipo</th>
+      <th>Año</th>
+      <th>Descripción scout</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-country="Alemania">
+      <td>Nathaniel Brown</td>
+      <td>🇩🇪 Alemania</td>
+      <td>Eintracht Frankfurt</td>
+      <td>2003</td>
+      <td class="description">Combina defensa sólida con un peligroso aporte ofensivo a base de centros precisos y velocidad.</td>
+    </tr>
+    <tr data-country="Alemania">
+      <td>Michael Kayode</td>
+      <td>🇮🇹 Italia</td>
+      <td>Fiorentina</td>
+      <td>2004</td>
+      <td class="description">Full-back moderno, con presencia física y capacidad para incorporarse al ataque.</td>
+    </tr>
+    <tr data-country="Países Bajos">
+      <td>Devyne Rensch</td>
+      <td>🇳🇱 Países Bajos</td>
+      <td>Ajax</td>
+      <td>2003</td>
+      <td class="description">Defensor con gran capacidad para sumarse al ataque y buena lectura táctica.</td>
+    </tr>
+    <tr data-country="Países Bajos">
+      <td>Anton Gaaei</td>
+      <td>🇩🇰 Dinamarca</td>
+      <td>Ajax</td>
+      <td>2002</td>
+      <td class="description">Lateral rápido y ofensivo, combina buen uno contra uno y proyección ofensiva.</td>
+    </tr>
+    <tr data-country="Países Bajos">
+      <td>Ryan Flamingo</td>
+      <td>🇳🇱 Países Bajos</td>
+      <td>Países Bajos</td>
+      <td>2002</td>
+      <td class="description">Sólido y joven defensa, destaca por su físico y agresividad defensiva.</td>
+    </tr>
+  </tbody>
+</table>
 
-<!-- EXTREMOS -->
-<section class="position-group">
-  <h2>Extremos (ED, EI)</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>País</th>
-        <th>Equipo</th>
-        <th>Año</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr data-country="Países Bajos">
-        <td>Leo Sauer</td>
-        <td><img src="https://flagcdn.com/w20/nl.png" alt="Países Bajos" class="flag" />Países Bajos</td>
-        <td>Feyenoord</td>
-        <td>2005</td>
-      </tr>
-      <tr data-country="Finlandia">
-        <td>Juho Talvitie</td>
-        <td><img src="https://flagcdn.com/w20/fi.png" alt="Finlandia" class="flag" />Finlandia</td>
-        <td>Heracles Almelo</td>
-        <td>2005</td>
-      </tr>
-      <tr data-country="España">
-        <td>Jesús Rodríguez</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2005</td>
-      </tr>
-      <tr data-country="España">
-        <td>Yeremay Hernández</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="España">
-        <td>Raúl Moro</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="Alemania">
-        <td>Paul Wanner</td>
-        <td><img src="https://flagcdn.com/w20/de.png" alt="Alemania" class="flag" />Alemania</td>
-        <td>Bayern München</td>
-        <td>2005</td>
-      </tr>
-      <tr data-country="Portugal">
-        <td>Tiago Djaló</td>
-        <td><img src="https://flagcdn.com/w20/pt.png" alt="Portugal" class="flag" />Portugal</td>
-        <td>Lille</td>
-        <td>2000</td>
-      </tr>
-      <tr data-country="España">
-        <td>Álvaro Sanz</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2003</td>
-      </tr>
-      <tr data-country="España">
-        <td>Amin Jbari</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2004</td>
-      </tr>
-      <tr data-country="España">
-        <td>Rafa Marín</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2003</td>
-      </tr>
-      <tr data-country="España">
-        <td>Adrián Arregui</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2002</td>
-      </tr>
-      <tr data-country="España">
-        <td>Marc Bernad</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2003</td>
-      </tr>
-      <tr data-country="España">
-        <td>Rodrigo de la Fuente</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2003</td>
-      </tr>
-      <tr data-country="España">
-        <td>Jon Martínez</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2004</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+<!-- LI -->
+<div class="position-header">Laterales Izquierdos (LI)</div>
+<table>
+  <thead>
+    <tr>
+      <th>Jugador</th>
+      <th>País</th>
+      <th>Equipo</th>
+      <th>Año</th>
+      <th>Descripción scout</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-country="España">
+      <td>Tomas Galvez</td>
+      <td>🇫🇮 Finlandia</td>
+      <td>Manchester City</td>
+      <td>2005</td>
+      <td class="description">Joven con gran proyección y buen desplazamiento por banda, aporta físico y técnica.</td>
+    </tr>
+    <tr data-country="Italia">
+      <td>Matteo Ruggeri</td>
+      <td>🇮🇹 Italia</td>
+      <td>Atalanta</td>
+      <td>2002</td>
+      <td class="description">Full-back con equilibrio entre defensa y ataque, buena lectura de juego y velocidad.</td>
+    </tr>
+  </tbody>
+</table>
 
-<!-- DELANTEROS -->
-<section class="position-group">
-  <h2>Delanteros (DC, ED, EI)</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>País</th>
-        <th>Equipo</th>
-        <th>Año</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr data-country="España">
-        <td>Adrià Altimira</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2004</td>
-      </tr>
-      <tr data-country="España">
-        <td>Marc Casadó</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2004</td>
-      </tr>
-      <tr data-country="España">
-        <td>Mikel Araña</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2004</td>
-      </tr>
-      <tr data-country="España">
-        <td>Arnau Tenas</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2001</td>
-      </tr>
-      <tr data-country="España">
-        <td>Gerard Fernández</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2003</td>
-      </tr>
-      <tr data-country="España">
-        <td>Víctor Torrecilla</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2005</td>
-      </tr>
-      <tr data-country="España">
-        <td>Antonio Martínez</td>
-        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
-        <td></td>
-        <td>2003</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+<!-- DFC -->
+<div class="position-header">Defensas Centrales (DFC)</div>
+<table>
+  <thead>
+    <tr>
+      <th>Jugador</th>
+      <th>País</th>
+      <th>Equipo</th>
+      <th>Año</th>
+      <th>Descripción scout</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-country="Italia">
+      <td>Diego Coppola</td>
+      <td>🇮🇹 Italia</td>
+      <td>Hellas Verona</td>
+      <td>2003</td>
+      <td class="description">Dominante en duelos aéreos y en interceptaciones, pieza clave en defensa.</td>
+    </tr>
+    <tr data-country="Turquía">
+      <td>Ümit Akdağ</td>
+      <td>🇷🇴 Rumania</td>
+      <td>Toulouse</td>
+      <td>2003</td>
+      <td class="description">Defensa contundente y fuerte físicamente, buen juego aéreo y posicionamiento.</td>
+    </tr>
+    <tr data-country="Rumania">
+      <td>Charlie Cresswell</td>
+      <td>🏴 Inglaterra</td>
+      <td>Inglaterra</td>
+      <td>2002</td>
+      <td class="description">Jugador con experiencia y sólida técnica defensiva, aporta seguridad.</td>
+    </tr>
+    <tr data-country="España">
+      <td>Cristhian Mosquera</td>
+      <td>🇪🇸 España</td>
+      <td>Valencia</td>
+      <td>2004</td>
+      <td class="description">Joven talento con buena técnica defensiva y salida de balón limpia.</td>
+    </tr>
+    <tr data-country="España">
+      <td>César Tárrega</td>
+      <td>🇪🇸 España</td>
+      <td>Valencia</td>
+      <td>2002</td>
+      <td class="description">Defensa fuerte y con capacidad para anticiparse y sacar el balón jugado.</td>
+    </tr>
+    <tr data-country="República Checa">
+      <td>Václav Paluska</td>
+      <td>🇨🇿 República Checa</td>
+      <td>Viktor Plzeň</td>
+      <td>2005</td>
+      <td class="description">Juvenil con buen posicionamiento y firmeza defensiva.</td>
+    </tr>
+    <!-- Agrega más jugadores aquí siguiendo el patrón -->
+  </tbody>
+</table>
+
+<!-- MC -->
+<div class="position-header">Centrocampistas (MC)</div>
+<table>
+  <thead>
+    <tr>
+      <th>Jugador</th>
+      <th>País</th>
+      <th>Equipo</th>
+      <th>Año</th>
+      <th>Descripción scout</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-country="Ucrania">
+      <td>Volodymyr Brazhko</td>
+      <td>🇺🇦 Ucrania</td>
+      <td>Dynamo Kyiv</td>
+      <td>2002</td>
+      <td class="description">Organizador de juego, buen pase y visión táctica.</td>
+    </tr>
+    <tr data-country="Dinamarca">
+      <td>Noah Nartey</td>
+      <td>🇩🇰 Dinamarca</td>
+      <td>Dinamarca</td>
+      <td></td>
+      <td class="description">Centrocampista con buena capacidad de recuperación y despliegue.</td>
+    </tr>
+    <tr data-country="Francia">
+      <td>Lucien Agoumé</td>
+      <td>🇫🇷 Francia</td>
+      <td>Francia</td>
+      <td>2002</td>
+      <td class="description">Jugador con buena técnica, fuerte en el pase y tácticamente inteligente.</td>
+    </tr>
+    <tr data-country="Inglaterra">
+      <td>Hayden Hackney</td>
+      <td>🏴 Inglaterra</td>
+      <td>Inglaterra</td>
+      <td>2003</td>
+      <td class="description">Centrocampista box-to-box con buen despliegue físico y técnica.</td>
+    </tr>
+    <tr data-country="República Checa">
+      <td>Matěj Šín</td>
+      <td>🇨🇿 República Checa</td>
+      <td>Baník Ostrava</td>
+      <td>2004</td>
+      <td class="description">Joven mediocentro con buen control de balón y anticipación.</td>
+    </tr>
+    <tr data-country="Alemania">
+      <td>Rocco Reitz</td>
+      <td>🇩🇪 Alemania</td>
+      <td>Alemania</td>
+      <td>2002</td>
+      <td class="description">Jugador con buena visión y capacidad para distribuir el juego.</td>
+    </tr>
+    <!-- Añade más si quieres -->
+  </tbody>
+</table>
+
+<!-- EI -->
+<div class="position-header">Extremos Izquierdos (EI)</div>
+<table>
+  <thead>
+    <tr>
+      <th>Jugador</th>
+      <th>País</th>
+      <th>Equipo</th>
+      <th>Año</th>
+      <th>Descripción scout</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-country="España">
+      <td>Jesús Rodríguez</td>
+      <td>🇪🇸 España</td>
+      <td>Libre</td>
+      <td>2005</td>
+      <td class="description">Extremo rápido y habilidoso, con buen regate y capacidad para asistir.</td>
+    </tr>
+    <tr data-country="España">
+      <td>Yeremay Hernández</td>
+      <td>🇪🇸 España</td>
+      <td>Libre</td>
+      <td>2002</td>
+      <td class="description">Jugador con buen desborde y habilidad para crear ocasiones de gol.</td>
+    </tr>
+    <tr data-country="España">
+      <td>Raúl Moro</td>
+      <td>🇪🇸 España</td>
+      <td>Libre</td>
+      <td>2002</td>
+      <td class="description">Extremo con velocidad y buen disparo desde fuera del área.</td>
+    </tr>
+    <tr data-country="Alemania">
+      <td>Paul Wanner</td>
+      <td>🇩🇪 Alemania</td>
+      <td>Bayern</td>
+      <td></td>
+      <td class="description">Jugador joven con buen control y visión ofensiva.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ED -->
+<div class="position-header">Extremos Derechos (ED)</div>
+<table>
+  <thead>
+    <tr>
+      <th>Jugador</th>
+      <th>País</th>
+      <th>Equipo</th>
+      <th>Año</th>
+      <th>Descripción scout</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-country="Países Bajos">
+      <td>Leo Sauer</td>
+      <td>🇳🇱 Países Bajos</td>
+      <td>Feyenoord</td>
+      <td>2005</td>
+      <td class="description">Extremo con gran habilidad técnica y capacidad para desequilibrar.</td>
+    </tr>
+    <tr data-country="Países Bajos">
+      <td>Juho Talvitie</td>
+      <td>🇫🇮 Finlandia</td>
+      <td>Heracles Almelo</td>
+      <td>2005</td>
+      <td class="description">Joven extremo con buen regate y velocidad.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- DC -->
+<div class="position-header">Delanteros Centros (DC)</div>
+<table>
+  <thead>
+    <tr>
+      <th>Jugador</th>
+      <th>País</th>
+      <th>Equipo</th>
+      <th>Año</th>
+      <th>Descripción scout</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-country="Rumania">
+      <td>Louis Munteanu</td>
+      <td>🇷🇴 Rumania</td>
+      <td>CFR Cluj</td>
+      <td>2002</td>
+      <td class="description">Delantero potente con buena definición dentro del área.</td>
+    </tr>
+    <tr data-country="Francia">
+      <td>Thierno Barry</td>
+      <td>🇫🇷 Francia</td>
+      <td>Francia</td>
+      <td>2003</td>
+      <td class="description">Delantero con buen físico y remate.</td>
+    </tr>
+    <tr data-country="Polonia">
+      <td>Szymon Włodarczyk</td>
+      <td>🇵🇱 Polonia</td>
+      <td>Salernitana</td>
+      <td>2003</td>
+      <td class="description">Jugador con olfato goleador y buen posicionamiento.</td>
+    </tr>
+    <!-- Añade más -->
+  </tbody>
+</table>
+
+<!-- MP -->
+<div class="position-header">Mediapuntas (MP)</div>
+<table>
+  <thead>
+    <tr>
+      <th>Jugador</th>
+      <th>País</th>
+      <th>Equipo</th>
+      <th>Año</th>
+      <th>Descripción scout</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-country="Inglaterra">
+      <td>Ethan Nwaneri</td>
+      <td>🏴 Inglaterra</td>
+      <td>Arsenal</td>
+      <td>2007</td>
+      <td class="description">Jugador muy joven con gran técnica y visión de juego.</td>
+    </tr>
+    <tr data-country="Francia">
+      <td>Ezechiel Banzuzi</td>
+      <td>🇫🇷 Francia</td>
+      <td>Libre</td>
+      <td>2005</td>
+      <td class="description">Mediapunta con buena conducción y capacidad para asistir.</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
 
 <script>
-  const countryFilter = document.getElementById('country-filter');
-
-  countryFilter.addEventListener('change', () => {
-    const selectedCountry = countryFilter.value;
-
-    const rows = document.querySelectorAll('tbody tr');
-    rows.forEach(row => {
-      const rowCountry = row.getAttribute('data-country');
-      if (selectedCountry === 'all' || rowCountry === selectedCountry) {
+function filterTable() {
+  const filter = document.getElementById('countryFilter').value;
+  const rows = document.querySelectorAll('tbody tr');
+  rows.forEach(row => {
+    if(filter === 'all') {
+      row.style.display = '';
+    } else {
+      const country = row.getAttribute('data-country');
+      if(country === filter) {
         row.style.display = '';
       } else {
         row.style.display = 'none';
       }
-    });
+    }
   });
+}
 </script>
 
 </body>
