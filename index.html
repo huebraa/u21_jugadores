@@ -102,70 +102,11 @@
     }
   }
 </style>
-<style>
-  #campo-futbol {
-    margin-bottom: 30px;
-  }
-  .campo {
-    position: relative;
-    width: 600px;
-    height: 400px;
-    background: #006400; /* verde campo */
-    border: 2px solid #fff;
-    border-radius: 10px;
-    margin: 0 auto 20px auto;
-  }
-  .posicion {
-    position: absolute;
-    width: 110px;
-    min-height: 40px;
-    padding: 3px 5px;
-    background: rgba(255,255,255,0.85);
-    border-radius: 5px;
-    font-size: 0.85rem;
-    overflow-y: auto;
-  }
-  .posicion.por { top: 85%; left: 45%; width: 110px; }
-  .posicion.ld { top: 60%; left: 10%; }
-  .posicion.li { top: 60%; right: 10%; }
-  .posicion.dfc { top: 55%; left: 40%; width: 120px; }
-  .posicion.dc { top: 40%; left: 45%; width: 120px; }
-  .posicion.mc { top: 35%; left: 45%; width: 120px; }
-  .posicion.mp { top: 25%; left: 45%; width: 120px; }
-  .posicion.ed { top: 20%; right: 10%; width: 110px; }
-  .posicion.ei { top: 20%; left: 10%; width: 110px; }
-  .jugador {
-    margin: 2px 0;
-    cursor: default;
-  }
-  .jugador img.flag {
-    width: 16px;
-    vertical-align: middle;
-    margin-right: 5px;
-  }
-</style>
-
 </head>
 <body>
 
 <h1>Jugadores por Posición - UEFA U-21 EURO 2025</h1>
 
-<section id="campo-futbol">
-  <h2>Campo de Fútbol</h2>
-  <div class="campo">
-    <div class="posicion por" title="Portero"></div>
-    <div class="posicion ld" title="Lateral Derecho"></div>
-    <div class="posicion li" title="Lateral Izquierdo"></div>
-    <div class="posicion dfc" title="Defensa Central"></div>
-    <div class="posicion dc" title="Delantero Centro"></div>
-    <div class="posicion mc" title="Mediocampista Central"></div>
-    <div class="posicion mp" title="Mediapunta"></div>
-    <div class="posicion ed" title="Extremo Derecho"></div>
-    <div class="posicion ei" title="Extremo Izquierdo"></div>
-  </div>
-</section>
-
-  
 <div id="filter-container">
   <label for="country-filter"><strong>Filtrar por país:</strong></label><br />
   <select id="country-filter">
@@ -647,55 +588,6 @@
       }
     });
   });
-</script>
-<script>
-  function getPlayersByPosition(positionCodes) {
-    const rows = document.querySelectorAll('tbody tr');
-    const players = [];
-    rows.forEach(row => {
-      const posCell = row.querySelector('td:nth-child(2)');
-      if (!posCell) return;
-      const pos = posCell.textContent.trim().toUpperCase();
-      if (positionCodes.includes(pos)) {
-        const name = row.querySelector('td:nth-child(1)').textContent.trim();
-        const countryImg = row.querySelector('td:nth-child(1) img.flag');
-        const flagSrc = countryImg ? countryImg.src : '';
-        players.push({name, flagSrc, pos});
-      }
-    });
-    return players;
-  }
-
-  function renderFieldPlayers() {
-    const positions = {
-      'por': ['POR'],
-      'ld': ['LD'],
-      'li': ['LI'],
-      'dfc': ['DFC'],
-      'dc': ['DC'],
-      'mc': ['MC'],
-      'mp': ['MP'],
-      'ed': ['ED'],
-      'ei': ['EI']
-    };
-    for (const [posDiv, posCodes] of Object.entries(positions)) {
-      const container = document.querySelector(`.campo .${posDiv}`);
-      if (!container) continue;
-      container.innerHTML = '';
-      const players = getPlayersByPosition(posCodes);
-      players.forEach(p => {
-        const el = document.createElement('div');
-        el.classList.add('jugador');
-        el.innerHTML = `<img src="${p.flagSrc}" alt="Bandera" class="flag" />${p.name}`;
-        container.appendChild(el);
-      });
-    }
-  }
-
-  // Ejecutar al cargar la página
-  renderFieldPlayers();
-
-  // Si haces filtro por país, aquí puedes llamar a renderFieldPlayers() otra vez para actualizar el campo
 </script>
 
 </body>
