@@ -1,156 +1,114 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Jugadores UEFA U-21 EURO 2025 - SCOUTED Style</title>
-<style>
-  /* Reset básico */
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f9fbfd;
-    color: #222;
-    margin: 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  h1 {
-    color: #004a99;
-    text-align: center;
-    margin-bottom: 1.5em;
-    font-weight: 700;
-  }
-  #filter-container {
-    margin-bottom: 1.5em;
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
-  }
-  label {
-    font-weight: 600;
-    margin-right: 8px;
-    font-size: 1.1em;
-  }
-  select {
-    padding: 8px 14px;
-    font-size: 1em;
-    border-radius: 8px;
-    border: 2px solid #004a99;
-    background: #fff;
-    color: #004a99;
-    cursor: pointer;
-    transition: border-color 0.3s ease;
-    width: 100%;
-    max-width: 200px;
-  }
-  select:hover, select:focus {
-    border-color: #ff6a00;
-    outline: none;
-  }
-
-  /* Contenedor responsive para la tabla */
-  .table-wrapper {
-    width: 100%;
-    max-width: 900px;
-    overflow-x: auto;
-    box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
-    border-radius: 10px;
-    background: white;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    min-width: 700px;
-  }
-  thead {
-    background: #004a99;
-    color: #fff;
-  }
-  thead th {
-    padding: 14px 12px;
-    text-align: left;
-    font-weight: 700;
-    font-size: 1em;
-  }
-  tbody tr:nth-child(even) {
-    background: #f0f7ff;
-  }
-  tbody tr:hover {
-    background: #ffe7cc;
-    transition: background-color 0.3s ease;
-  }
-  tbody td {
-    padding: 12px 10px;
-    vertical-align: top;
-    font-size: 0.95em;
-    border-bottom: 1px solid #ddd;
-  }
-  .flag {
-    width: 24px;
-    height: 16px;
-    vertical-align: middle;
-    margin-right: 6px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  .position-header {
-    background: #ff6a00;
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.1em;
-    padding: 10px 15px;
-    border-radius: 6px 6px 0 0;
-  }
-  .description {
-    font-size: 0.9em;
-    color: #555;
-    margin-top: 4px;
-    line-height: 1.3;
-  }
-  
-  /* Responsive tweaks para móviles */
-  @media (max-width: 600px) {
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jugadores Ordenables y Filtrables</title>
+  <style>
     body {
-      margin: 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f8fa;
+      color: #222;
+      margin: 20px;
     }
     h1 {
-      font-size: 1.5em;
+      color: #004a99;
+      text-align: center;
+      margin-bottom: 1em;
     }
     #filter-container {
-      max-width: 100%;
+      margin-bottom: 1em;
+      text-align: center;
     }
     select {
-      max-width: 100%;
+      padding: 8px 12px;
+      font-size: 1em;
+      border-radius: 8px;
+      border: 2px solid #004a99;
+      background: #ffffff;
+      color: #004a99;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+    select:hover, select:focus {
+      border-color: #ff6a00;
+      outline: none;
     }
     table {
-      min-width: 600px;
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      background: white;
+    }
+    thead {
+      background: #004a99;
+      color: #fff;
+    }
+    thead th {
+      padding: 12px 15px;
+      user-select: none;
+      position: relative;
+      cursor: pointer;
+    }
+    thead th:hover {
+      background-color: #003370;
+    }
+    tbody tr:nth-child(even) {
+      background: #f0f7ff;
+    }
+    tbody tr:hover {
+      background: #ffe7cc;
     }
     tbody td {
-      font-size: 0.9em;
-      padding: 10px 8px;
+      padding: 12px 15px;
+      vertical-align: top;
+      border-bottom: 1px solid #e0e0e0;
     }
-  }
-</style>
+    .flag {
+      width: 24px;
+      height: 16px;
+      vertical-align: middle;
+      margin-right: 6px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    .position-header {
+      background: #ff6a00;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2em;
+      padding: 10px 15px;
+      border-radius: 8px 8px 0 0;
+    }
+    .description {
+      font-size: 0.9em;
+      color: #333;
+      margin-top: 4px;
+    }
+    thead th.asc::after {
+      content: ' ▲';
+      font-size: 0.7em;
+    }
+    thead th.desc::after {
+      content: ' ▼';
+      font-size: 0.7em;
+    }
+  </style>
 </head>
 <body>
+  <h1>Jugadores Ordenables y Filtrables</h1>
 
-<h1>Jugadores UEFA U-21 EURO 2025 - SCOUTED Style</h1>
+  <div id="filter-container">
+    <label for="countryFilter">Filtrar por país: </label>
+    <select id="countryFilter">
+      <option value="all">Todos</option>
+      <!-- Se añadirán opciones automáticamente -->
+    </select>
+  </div>
 
-<div id="filter-container">
-  <label for="countryFilter">Filtrar por país: </label>
-  <select id="countryFilter" onchange="filterTable()">
-    <option value="all">Todos</option>
-  </select>
-</div>
-
-<div class="table-wrapper">
   <table id="playersTable" border="0" cellspacing="0" cellpadding="0">
     <thead>
       <tr>
@@ -159,20 +117,16 @@
         <th>País</th>
         <th>Equipo</th>
         <th>Año</th>
-        <th>Descripción scout</th>
+        <th>Descripción</th>
       </tr>
     </thead>
     <tbody>
-      <!-- FILAS GENERADAS POR JAVASCRIPT -->
+      <!-- Filas generadas por JS -->
     </tbody>
   </table>
-</div>
 
-<script>
-// Aquí puedes insertar tu array players y demás funciones sin cambios
-// (por simplicidad te dejo solo la parte de renderTable y el filtro)
-
-const players = [
+  <script>
+    const players = [
   {name:"Lucas Bergström", pos:"POR", country:"Finlandia", team:"Chelsea", year:"2002", desc:"Portero de Chelsea con experiencia internacional y presencia fuerte bajo los palos."},
   {name:"Noah Atubolu", pos:"POR", country:"Alemania", team:"Alemania", year:"2002", desc:"Mejor portero del torneo según SCOUTED, combinación de seguridad y juego con los pies."},
   // Laterales derechos
@@ -231,97 +185,167 @@ const players = [
   {name:"Ruben van Bommel", pos:"MP", country:"Países Bajos", team:"", year:"2004", desc:"Jugador con buen pase y llegada desde segunda línea."}
 ];
 
-function getFlagUrl(country) {
-  const flags = {
-    "Finlandia": "https://flagcdn.com/w20/fi.png",
-    "Alemania": "https://flagcdn.com/w20/de.png",
-    "Italia": "https://flagcdn.com/w20/it.png",
-    "Países Bajos": "https://flagcdn.com/w20/nl.png",
-    "Dinamarca": "https://flagcdn.com/w20/dk.png",
-    "Rumanía": "https://flagcdn.com/w20/ro.png",
-    "Chequia": "https://flagcdn.com/w20/cz.png",
-    "Inglaterra": "https://flagcdn.com/w20/gb-eng.png",
-    "España": "https://flagcdn.com/w20/es.png",
-    "Ucrania": "https://flagcdn.com/w20/ua.png",
-    "Francia": "https://flagcdn.com/w20/fr.png",
-    "Georgia": "https://flagcdn.com/w20/ge.png",
-    "Portugal": "https://flagcdn.com/w20/pt.png",
-    "Eslovaquia": "https://flagcdn.com/w20/sk.png",
-    "Polonia": "https://flagcdn.com/w20/pl.png",
-    "Angola": "https://flagcdn.com/w20/ao.png",
-  };
-  return flags[country] || "";
-}
 
-const countryFilter = document.getElementById('countryFilter');
-const uniqueCountries = [...new Set(players.map(p => p.country).filter(c => c))].sort();
-uniqueCountries.forEach(country => {
-  const option = document.createElement('option');
-  option.value = country;
-  option.textContent = country;
-  countryFilter.appendChild(option);
-});
+    const positionNames = {
+      "POR": "Porteros",
+      "LD": "Laterales Derechos",
+      "LI": "Laterales Izquierdos",
+      "DFC": "Defensas Centrales",
+      "DC": "Delanteros Centros",
+      "MC": "Centrocampistas",
+      "ED": "Extremos Derechos",
+      "EI": "Extremos Izquierdos",
+      "MP": "Mediapuntas"
+    };
 
-function renderTable(filterCountry = 'all') {
-  const tbody = document.querySelector('#playersTable tbody');
-  tbody.innerHTML = '';
+    const positionOrder = ["POR", "LD", "LI", "DFC", "MC", "ED", "EI", "DC", "MP"];
 
-  const grouped = {};
-  players.forEach(p => {
-    if (filterCountry === 'all' || p.country === filterCountry) {
-      if (!grouped[p.pos]) grouped[p.pos] = [];
-      grouped[p.pos].push(p);
+    const countryFilter = document.getElementById('countryFilter');
+    const tbody = document.querySelector('#playersTable tbody');
+    const thead = document.querySelector('#playersTable thead');
+
+    // Para guardar estado de orden
+    let currentSort = { column: null, ascending: true };
+
+    // Función para obtener URL de bandera (usar alguna fuente pública)
+    function getFlagUrl(country) {
+      // Usaremos CDN de countryflags.io o similar (ejemplo)
+      // countryflags.io ya no funciona, usaremos otra fuente:
+      // https://flagcdn.com/ (usa código ISO 2 letras, aquí simplificamos usando minúsculas)
+      // Como no tenemos ISO, lo haremos en base a un diccionario simplificado
+      const isoCodes = {
+        "Germany": "de",
+        "Spain": "es",
+        "Argentina": "ar",
+        "France": "fr",
+        "Croatia": "hr",
+        "Scotland": "gb-sct",
+        "Norway": "no",
+        "Belgium": "be",
+        "Brazil": "br",
+        "South Korea": "kr"
+      };
+      const code = isoCodes[country] || "un"; // un = bandera UN (desconocido)
+      return `https://flagcdn.com/w40/${code}.png`;
     }
-  });
 
-  const positionNames = {
-    "POR": "Porteros",
-    "LD": "Laterales Derechos",
-    "LI": "Laterales Izquierdos",
-    "DFC": "Defensas Centrales",
-    "DC": "Delanteros Centros",
-    "MC": "Centrocampistas",
-    "ED": "Extremos Derechos",
-    "EI": "Extremos Izquierdos",
-    "MP": "Mediapuntas"
-  };
-
-  const order = ["POR", "LD", "LI", "DFC", "MC", "ED", "EI", "DC", "MP"];
-
-  order.forEach(posKey => {
-    if (grouped[posKey]) {
-      const trHeader = document.createElement('tr');
-      const tdHeader = document.createElement('td');
-      tdHeader.colSpan = 6;
-      tdHeader.className = 'position-header';
-      tdHeader.textContent = positionNames[posKey] || posKey;
-      trHeader.appendChild(tdHeader);
-      tbody.appendChild(trHeader);
-
-      grouped[posKey].forEach(p => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${p.name}</td>
-          <td>${p.pos}</td>
-          <td><img src="${getFlagUrl(p.country)}" alt="${p.country}" class="flag" /> ${p.country}</td>
-          <td>${p.team}</td>
-          <td>${p.year}</td>
-          <td><div class="description">${p.desc}</div></td>
-        `;
-        tbody.appendChild(tr);
+    // Llena el select con países únicos
+    function populateCountryFilter() {
+      const countries = [...new Set(players.map(p => p.country))].sort();
+      countries.forEach(c => {
+        const option = document.createElement('option');
+        option.value = c;
+        option.textContent = c;
+        countryFilter.appendChild(option);
       });
     }
-  });
-}
 
-function filterTable() {
-  const selectedCountry = countryFilter.value;
-  renderTable(selectedCountry);
-}
+    // Comparador para ordenar
+    function compare(a, b, column, ascending) {
+      let valA = a[column] || "";
+      let valB = b[column] || "";
 
-// Inicializamos la tabla
-renderTable();
-</script>
+      if(column === 'year') {
+        valA = parseInt(valA) || 0;
+        valB = parseInt(valB) || 0;
+      } else {
+        valA = valA.toString().toLowerCase();
+        valB = valB.toString().toLowerCase();
+      }
 
+      if(valA < valB) return ascending ? -1 : 1;
+      if(valA > valB) return ascending ? 1 : -1;
+      return 0;
+    }
+
+    function clearSortIndicators() {
+      thead.querySelectorAll('th').forEach(th => {
+        th.classList.remove('asc', 'desc');
+      });
+    }
+
+    // Renderizar tabla según filtro y orden
+    function renderTable(filterCountry = 'all', sortColumn = null, ascending = true) {
+      tbody.innerHTML = '';
+
+      // Filtrar
+      let filteredPlayers = players.filter(p => filterCountry === 'all' || p.country === filterCountry);
+
+      // Ordenar
+      if(sortColumn) {
+        filteredPlayers.sort((a, b) => compare(a, b, sortColumn, ascending));
+      }
+
+      // Agrupar por posición
+      const grouped = {};
+      filteredPlayers.forEach(p => {
+        if (!grouped[p.pos]) grouped[p.pos] = [];
+        grouped[p.pos].push(p);
+      });
+
+      positionOrder.forEach(posKey => {
+        if(grouped[posKey]) {
+          // Fila header posición
+          const trHeader = document.createElement('tr');
+          const tdHeader = document.createElement('td');
+          tdHeader.colSpan = 6;
+          tdHeader.className = 'position-header';
+          tdHeader.textContent = positionNames[posKey] || posKey;
+          trHeader.appendChild(tdHeader);
+          tbody.appendChild(trHeader);
+
+          // Filas jugadores
+          grouped[posKey].forEach(p => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${p.name}</td>
+              <td>${p.pos}</td>
+              <td><img src="${getFlagUrl(p.country)}" alt="${p.country}" class="flag" /> ${p.country}</td>
+              <td>${p.team}</td>
+              <td>${p.year}</td>
+              <td><div class="description">${p.desc}</div></td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+      });
+
+      // Actualizar indicadores de orden
+      clearSortIndicators();
+      if(sortColumn) {
+        const indexMap = {name: 0, pos:1, country:2, team:3, year:4, desc:5};
+        const th = thead.querySelectorAll('th')[indexMap[sortColumn]];
+        if(th) {
+          th.classList.add(ascending ? 'asc' : 'desc');
+        }
+      }
+    }
+
+    // Eventos clic en encabezados para ordenar
+    thead.querySelectorAll('th').forEach((th, i) => {
+      const columnMap = ['name', 'pos', 'country', 'team', 'year', 'desc'];
+      th.addEventListener('click', () => {
+        const col = columnMap[i];
+        if(currentSort.column === col) {
+          currentSort.ascending = !currentSort.ascending;
+        } else {
+          currentSort.column = col;
+          currentSort.ascending = true;
+        }
+        renderTable(countryFilter.value, currentSort.column, currentSort.ascending);
+      });
+    });
+
+    // Evento cambio filtro país
+    countryFilter.addEventListener('change', () => {
+      currentSort = { column: null, ascending: true };
+      renderTable(countryFilter.value);
+      clearSortIndicators();
+    });
+
+    // Inicialización
+    populateCountryFilter();
+    renderTable();
+  </script>
 </body>
 </html>
