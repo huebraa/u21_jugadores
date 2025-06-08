@@ -1,37 +1,40 @@
-from pathlib import Path
-
-# HTML content split into structure and table
-html_structure_start = """
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Jugadores por Posición</title>
+  <title>Jugadores por Posición - UEFA U-21 EURO 2025</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 20px;
+      padding: 2rem;
+      background: #f9f9f9;
     }
-    .table {
-      border-collapse: collapse;
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    table {
       width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      background: white;
     }
-    .table th, .table td {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
-    .table th {
-      background-color: #f2f2f2;
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.75rem;
       text-align: left;
     }
-    .table-striped tr:nth-child(even) {
+    th {
+      background-color: #f0f0f0;
+    }
+    tr:nth-child(even) {
       background-color: #f9f9f9;
     }
   </style>
 </head>
 <body>
-  <h1>Jugadores por Posición</h1>
-  <table class="table table-striped">
+  <h1>Jugadores por Posición - UEFA U-21 EURO 2025</h1>
+  <table>
     <thead>
       <tr>
         <th>Nombre</th>
@@ -41,79 +44,56 @@ html_structure_start = """
       </tr>
     </thead>
     <tbody>
-"""
-
-# Data rows based on the earlier structured players list
-players_data = [
-    ("Lucas Bergström", "POR", "Chelsea", "2002"),
-    ("Noah Atubolu", "POR", "Alemania", "2002"),
-    ("Nathaniel Brown", "LD", "Eintracht Frankfurt", "2003"),
-    ("Tomas Galvez", "LI", "Manchester City", "2005"),
-    ("Matteo Ruggeri", "LI", "Atalanta", "2002"),
-    ("Michael Kayode", "LD", "Fiorentina", "2004"),
-    ("Devyne Rensch", "LD", "Ajax", "2003"),
-    ("Anton Gaaei", "LD", "Ajax", "2002"),
-    ("Diego Coppola", "DFC", "Hellas Verona", "2003"),
-    ("Ümit Akdağ", "DFC", "Toulouse", "2003"),
-    ("Louis Munteanu", "DC", "CFR Cluj", "2002"),
-    ("Jan Paluska", "DFC", "Viktor Plzeň", "2005"),
-    ("Charlie Cresswell", "DFC", "Inglaterra", "2002"),
-    ("Finn Jeltsch", "DFC", "VfB Stuttgart", ""),
-    ("Nathan Zézé", "DFC", "", ""),
-    ("Cristhian Mosquera", "DFC", "Valencia", "2004"),
-    ("César Tárrega", "DFC", "Valencia", "2002"),
-    ("Taras Mykhavko", "DFC", "Dynamo Kyiv", "2005"),
-    ("Ryan Flamingo", "DFC", "Países Bajos", "2002"),
-    ("Wout Goes", "DFC", "Países Bajos", "2004"),
-    ("Jorrel Hato", "DFC", "Países Bajos", "2006"),
-    ("Volodymyr Brazhko", "MC", "Dynamo Kyiv", "2002"),
-    ("Noah Nartey", "MC", "Dinamarca", ""),
-    ("Lucien Agoumé", "MC", "Francia", "2002"),
-    ("Hayden Hackney", "MC", "Inglaterra", "2003"),
-    ("Matěj Šín", "MC", "Baník Ostrava", "2004"),
-    ("Mikel Jauregizar", "MC", "", "2003"),
-    ("Leo Sauer", "ED", "Feyenoord", "2005"),
-    ("Juho Talvitie", "ED", "Heracles Almelo", "2005"),
-    ("Jesús Rodríguez", "EI", "", "2005"),
-    ("Yeremay Hernández", "EI", "", "2002"),
-    ("Raúl Moro", "EI", "", "2002"),
-    ("Paul Wanner", "EI", "Bayern", ""),
-    ("Roger Fernandes", "EI", "Portugal", "2005"),
-    ("Geovany Quenda", "EI", "Chelsea", ""),
-    ("Gabriel Sigua", "MC", "FC Basel", "2005"),
-    ("Rocco Reitz", "MC", "Alemania", "2002"),
-    ("Merlin Röhl", "MC", "Alemania", "2002"),
-    ("Paul Nebel", "MC", "Alemania", "2002"),
-    ("Lucien Agoumé", "MC", "Francia", "2002"),
-    ("Castello Lukeba", "DFC", "Francia", "2002"),
-    ("Thierno Barry", "DC", "Francia", "2003"),
-    ("Szymon Włodarczyk", "DC", "Salernitana", "2003"),
-    ("William Osula", "DC", "Newcastle United", "2003"),
-    ("William Böving", "DC", "Sturm Graz", "2003"),
-    ("Mathias Kvistgaarden", "DC", "Brøndby", "2002"),
-    ("Conrad Harder", "DC", "Sporting CP", "2005"),
-    ("Ethan Nwaneri", "MP", "Arsenal", "2007"),
-    ("Ezechiel Banzuzi", "MP", "", "2005"),
-    ("Ruben van Bommel", "MP", "", "2004"),
-]
-
-# Generate table rows
-table_rows = "\n".join(
-    f"      <tr><td>{name}</td><td>{pos}</td><td>{team}</td><td>{year}</td></tr>" for name, pos, team, year in players_data
-)
-
-html_structure_end = """
+      <tr><td>Lucas Bergström</td><td>POR</td><td>Chelsea</td><td>2002</td></tr>
+      <tr><td>Noah Atubolu</td><td>POR</td><td>Alemania</td><td>2002</td></tr>
+      <tr><td>Nathaniel Brown</td><td>LD</td><td>Eintracht Frankfurt</td><td>2003</td></tr>
+      <tr><td>Tomas Galvez</td><td>LI</td><td>Manchester City</td><td>2005</td></tr>
+      <tr><td>Matteo Ruggeri</td><td>LI</td><td>Atalanta</td><td>2002</td></tr>
+      <tr><td>Michael Kayode</td><td>LD</td><td>Fiorentina</td><td>2004</td></tr>
+      <tr><td>Devyne Rensch</td><td>LD</td><td>Ajax</td><td>2003</td></tr>
+      <tr><td>Anton Gaaei</td><td>LD</td><td>Ajax</td><td>2002</td></tr>
+      <tr><td>Diego Coppola</td><td>DFC</td><td>Hellas Verona</td><td>2003</td></tr>
+      <tr><td>Ümit Akdağ</td><td>DFC</td><td>Toulouse</td><td>2003</td></tr>
+      <tr><td>Louis Munteanu</td><td>DC</td><td>CFR Cluj</td><td>2002</td></tr>
+      <tr><td>Jan Paluska</td><td>DFC</td><td>Viktor Plzeň</td><td>2005</td></tr>
+      <tr><td>Charlie Cresswell</td><td>DFC</td><td>Inglaterra</td><td>2002</td></tr>
+      <tr><td>Finn Jeltsch</td><td>DFC</td><td>VfB Stuttgart</td><td></td></tr>
+      <tr><td>Nathan Zézé</td><td>DFC</td><td></td><td></td></tr>
+      <tr><td>Cristhian Mosquera</td><td>DFC</td><td>Valencia</td><td>2004</td></tr>
+      <tr><td>César Tárrega</td><td>DFC</td><td>Valencia</td><td>2002</td></tr>
+      <tr><td>Taras Mykhavko</td><td>DFC</td><td>Dynamo Kyiv</td><td>2005</td></tr>
+      <tr><td>Ryan Flamingo</td><td>DFC</td><td>Países Bajos</td><td>2002</td></tr>
+      <tr><td>Wout Goes</td><td>DFC</td><td>Países Bajos</td><td>2004</td></tr>
+      <tr><td>Jorrel Hato</td><td>DFC</td><td>Países Bajos</td><td>2006</td></tr>
+      <tr><td>Volodymyr Brazhko</td><td>MC</td><td>Dynamo Kyiv</td><td>2002</td></tr>
+      <tr><td>Noah Nartey</td><td>MC</td><td>Dinamarca</td><td></td></tr>
+      <tr><td>Lucien Agoumé</td><td>MC</td><td>Francia</td><td>2002</td></tr>
+      <tr><td>Hayden Hackney</td><td>MC</td><td>Inglaterra</td><td>2003</td></tr>
+      <tr><td>Matěj Šín</td><td>MC</td><td>Baník Ostrava</td><td>2004</td></tr>
+      <tr><td>Mikel Jauregizar</td><td>MC</td><td></td><td>2003</td></tr>
+      <tr><td>Leo Sauer</td><td>ED</td><td>Feyenoord</td><td>2005</td></tr>
+      <tr><td>Juho Talvitie</td><td>ED</td><td>Heracles Almelo</td><td>2005</td></tr>
+      <tr><td>Jesús Rodríguez</td><td>EI</td><td></td><td>2005</td></tr>
+      <tr><td>Yeremay Hernández</td><td>EI</td><td></td><td>2002</td></tr>
+      <tr><td>Raúl Moro</td><td>EI</td><td></td><td>2002</td></tr>
+      <tr><td>Paul Wanner</td><td>EI</td><td>Bayern</td><td></td></tr>
+      <tr><td>Roger Fernandes</td><td>EI</td><td>Portugal</td><td>2005</td></tr>
+      <tr><td>Geovany Quenda</td><td>EI</td><td>Chelsea</td><td></td></tr>
+      <tr><td>Gabriel Sigua</td><td>MC</td><td>FC Basel</td><td>2005</td></tr>
+      <tr><td>Rocco Reitz</td><td>MC</td><td>Alemania</td><td>2002</td></tr>
+      <tr><td>Merlin Röhl</td><td>MC</td><td>Alemania</td><td>2002</td></tr>
+      <tr><td>Paul Nebel</td><td>MC</td><td>Alemania</td><td>2002</td></tr>
+      <tr><td>Castello Lukeba</td><td>DFC</td><td>Francia</td><td>2002</td></tr>
+      <tr><td>Thierno Barry</td><td>DC</td><td>Francia</td><td>2003</td></tr>
+      <tr><td>Szymon Włodarczyk</td><td>DC</td><td>Salernitana</td><td>2003</td></tr>
+      <tr><td>William Osula</td><td>DC</td><td>Newcastle United</td><td>2003</td></tr>
+      <tr><td>William Böving</td><td>DC</td><td>Sturm Graz</td><td>2003</td></tr>
+      <tr><td>Mathias Kvistgaarden</td><td>DC</td><td>Brøndby</td><td>2002</td></tr>
+      <tr><td>Conrad Harder</td><td>DC</td><td>Sporting CP</td><td>2005</td></tr>
+      <tr><td>Ethan Nwaneri</td><td>MP</td><td>Arsenal</td><td>2007</td></tr>
+      <tr><td>Ezechiel Banzuzi</td><td>MP</td><td></td><td>2005</td></tr>
+      <tr><td>Ruben van Bommel</td><td>MP</td><td></td><td>2004</td></tr>
     </tbody>
   </table>
 </body>
 </html>
-"""
-
-# Combine all parts
-full_html = html_structure_start + table_rows + html_structure_end
-
-# Save to file
-output_path = Path("/mnt/data/jugadores_por_posicion.html")
-output_path.write_text(full_html, encoding="utf-8")
-output_path
-
