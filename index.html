@@ -15,7 +15,20 @@
   h1 {
     text-align: center;
     color: #444;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+  }
+  #filter-container {
+    max-width: 400px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+  #country-filter {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 300px;
   }
   section.position-group {
     margin-bottom: 40px;
@@ -62,12 +75,6 @@
     border-radius: 3px;
     box-shadow: 0 0 1px rgba(0,0,0,0.15);
   }
-  .pos-abbr {
-    font-weight: 700;
-    color: #888;
-    width: 50px;
-    text-align: center;
-  }
   @media (max-width: 600px) {
     table, thead, tbody, th, td, tr {
       display: block;
@@ -100,6 +107,26 @@
 
 <h1>Jugadores por Posición - UEFA U-21 EURO 2025</h1>
 
+<div id="filter-container">
+  <label for="country-filter"><strong>Filtrar por país:</strong></label><br />
+  <select id="country-filter">
+    <option value="all">Todos los países</option>
+    <option value="Finlandia">Finlandia</option>
+    <option value="Alemania">Alemania</option>
+    <option value="Italia">Italia</option>
+    <option value="Rumania">Rumania</option>
+    <option value="República Checa">República Checa</option>
+    <option value="Inglaterra">Inglaterra</option>
+    <option value="Francia">Francia</option>
+    <option value="España">España</option>
+    <option value="Ucrania">Ucrania</option>
+    <option value="Países Bajos">Países Bajos</option>
+    <option value="Dinamarca">Dinamarca</option>
+    <option value="Suiza">Suiza</option>
+    <option value="Portugal">Portugal</option>
+  </select>
+</div>
+
 <!-- PORTEROS -->
 <section class="position-group">
   <h2>Porteros (POR)</h2>
@@ -113,13 +140,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr data-country="Finlandia">
         <td>Lucas Bergström</td>
         <td><img src="https://flagcdn.com/w20/fi.png" alt="Finlandia" class="flag" />Finlandia</td>
         <td>Chelsea</td>
         <td>2002</td>
       </tr>
-      <tr>
+      <tr data-country="Alemania">
         <td>Noah Atubolu</td>
         <td><img src="https://flagcdn.com/w20/de.png" alt="Alemania" class="flag" />Alemania</td>
         <td>Alemania</td>
@@ -142,97 +169,97 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr data-country="Italia">
         <td>Matteo Ruggeri</td>
         <td><img src="https://flagcdn.com/w20/it.png" alt="Italia" class="flag" />Italia</td>
         <td>Atalanta</td>
         <td>2002</td>
       </tr>
-      <tr>
+      <tr data-country="Italia">
         <td>Michael Kayode</td>
         <td><img src="https://flagcdn.com/w20/it.png" alt="Italia" class="flag" />Italia</td>
         <td>Fiorentina</td>
         <td>2004</td>
       </tr>
-      <tr>
+      <tr data-country="Italia">
         <td>Diego Coppola</td>
         <td><img src="https://flagcdn.com/w20/it.png" alt="Italia" class="flag" />Italia</td>
         <td>Hellas Verona</td>
         <td>2003</td>
       </tr>
-      <tr>
+      <tr data-country="Rumania">
         <td>Ümit Akdağ</td>
         <td><img src="https://flagcdn.com/w20/ro.png" alt="Rumania" class="flag" />Rumania</td>
         <td>Toulouse</td>
         <td>2003</td>
       </tr>
-      <tr>
+      <tr data-country="Rumania">
         <td>Louis Munteanu</td>
         <td><img src="https://flagcdn.com/w20/ro.png" alt="Rumania" class="flag" />Rumania</td>
         <td>CFR Cluj</td>
         <td>2002</td>
       </tr>
-      <tr>
+      <tr data-country="República Checa">
         <td>Jan Paluska</td>
         <td><img src="https://flagcdn.com/w20/cz.png" alt="República Checa" class="flag" />República Checa</td>
         <td>Viktor Plzeň</td>
         <td>2005</td>
       </tr>
-      <tr>
+      <tr data-country="Inglaterra">
         <td>Charlie Cresswell</td>
         <td><img src="https://flagcdn.com/w20/gb.png" alt="Inglaterra" class="flag" />Inglaterra</td>
         <td>Inglaterra</td>
         <td>2002</td>
       </tr>
-      <tr>
+      <tr data-country="Alemania">
         <td>Finn Jeltsch</td>
         <td><img src="https://flagcdn.com/w20/de.png" alt="Alemania" class="flag" />Alemania</td>
         <td>VfB Stuttgart</td>
         <td></td>
       </tr>
-      <tr>
+      <tr data-country="Francia">
         <td>Nathan Zézé</td>
         <td><img src="https://flagcdn.com/w20/fr.png" alt="Francia" class="flag" />Francia</td>
         <td></td>
         <td></td>
       </tr>
-      <tr>
+      <tr data-country="España">
         <td>Cristhian Mosquera</td>
         <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
         <td>Valencia</td>
         <td>2004</td>
       </tr>
-      <tr>
+      <tr data-country="España">
         <td>César Tárrega</td>
         <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
         <td>Valencia</td>
         <td>2002</td>
       </tr>
-      <tr>
+      <tr data-country="Ucrania">
         <td>Taras Mykhavko</td>
         <td><img src="https://flagcdn.com/w20/ua.png" alt="Ucrania" class="flag" />Ucrania</td>
         <td>Dynamo Kyiv</td>
         <td>2005</td>
       </tr>
-      <tr>
+      <tr data-country="Países Bajos">
         <td>Ryan Flamingo</td>
         <td><img src="https://flagcdn.com/w20/nl.png" alt="Países Bajos" class="flag" />Países Bajos</td>
         <td>Países Bajos</td>
         <td>2002</td>
       </tr>
-      <tr>
+      <tr data-country="Países Bajos">
         <td>Wout Goes</td>
         <td><img src="https://flagcdn.com/w20/nl.png" alt="Países Bajos" class="flag" />Países Bajos</td>
         <td>Países Bajos</td>
         <td>2004</td>
       </tr>
-      <tr>
+      <tr data-country="Países Bajos">
         <td>Jorrel Hato</td>
         <td><img src="https://flagcdn.com/w20/nl.png" alt="Países Bajos" class="flag" />Países Bajos</td>
         <td>Países Bajos</td>
         <td>2006</td>
       </tr>
-      <tr>
+      <tr data-country="Francia">
         <td>Castello Lukeba</td>
         <td><img src="https://flagcdn.com/w20/fr.png" alt="Francia" class="flag" />Francia</td>
         <td>Francia</td>
@@ -255,83 +282,131 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr data-country="Ucrania">
         <td>Volodymyr Brazhko</td>
         <td><img src="https://flagcdn.com/w20/ua.png" alt="Ucrania" class="flag" />Ucrania</td>
         <td>Dynamo Kyiv</td>
         <td>2002</td>
       </tr>
-      <tr>
+      <tr data-country="Dinamarca">
         <td>Noah Nartey</td>
         <td><img src="https://flagcdn.com/w20/dk.png" alt="Dinamarca" class="flag" />Dinamarca</td>
         <td>Dinamarca</td>
         <td></td>
       </tr>
-      <tr>
+      <tr data-country="Francia">
         <td>Lucien Agoumé</td>
         <td><img src="https://flagcdn.com/w20/fr.png" alt="Francia" class="flag" />Francia</td>
         <td>Francia</td>
         <td>2002</td>
       </tr>
-      <tr>
+      <tr data-country="Inglaterra">
         <td>Hayden Hackney</td>
         <td><img src="https://flagcdn.com/w20/gb.png" alt="Inglaterra" class="flag" />Inglaterra</td>
         <td>Inglaterra</td>
         <td>2003</td>
       </tr>
-      <tr>
+      <tr data-country="República Checa">
         <td>Matěj Šín</td>
         <td><img src="https://flagcdn.com/w20/cz.png" alt="República Checa" class="flag" />República Checa</td>
         <td>Baník Ostrava</td>
         <td>2004</td>
       </tr>
-      <tr>
+      <tr data-country="España">
         <td>Mikel Jauregizar</td>
         <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
         <td></td>
         <td>2003</td>
       </tr>
-      <tr>
+      <tr data-country="Países Bajos">
         <td>Gabriel Sigua</td>
         <td><img src="https://flagcdn.com/w20/ch.png" alt="Suiza" class="flag" />Suiza</td>
         <td>FC Basel</td>
         <td>2005</td>
       </tr>
-      <tr>
+      <tr data-country="Alemania">
         <td>Rocco Reitz</td>
         <td><img src="https://flagcdn.com/w20/de.png" alt="Alemania" class="flag" />Alemania</td>
         <td>Alemania</td>
         <td>2002</td>
       </tr>
-      <tr>
+      <tr data-country="Alemania">
         <td>Merlin Röhl</td>
         <td><img src="https://flagcdn.com/w20/de.png" alt="Alemania" class="flag" />Alemania</td>
         <td>Alemania</td>
         <td>2002</td>
       </tr>
-      <tr>
+      <tr data-country="Alemania">
         <td>Paul Nebel</td>
         <td><img src="https://flagcdn.com/w20/de.png" alt="Alemania" class="flag" />Alemania</td>
         <td>Alemania</td>
         <td>2002</td>
       </tr>
-      <tr>
+      <tr data-country="Francia">
+        <td>Lucien Agoumé</td>
+        <td><img src="https://flagcdn.com/w20/fr.png" alt="Francia" class="flag" />Francia</td>
+        <td>Francia</td>
+        <td>2002</td>
+      </tr>
+      <tr data-country="Francia">
+        <td>Castello Lukeba</td>
+        <td><img src="https://flagcdn.com/w20/fr.png" alt="Francia" class="flag" />Francia</td>
+        <td>Francia</td>
+        <td>2002</td>
+      </tr>
+      <tr data-country="Francia">
+        <td>Thierno Barry</td>
+        <td><img src="https://flagcdn.com/w20/fr.png" alt="Francia" class="flag" />Francia</td>
+        <td>Francia</td>
+        <td>2003</td>
+      </tr>
+      <tr data-country="Polonia">
+        <td>Szymon Włodarczyk</td>
+        <td><img src="https://flagcdn.com/w20/pl.png" alt="Polonia" class="flag" />Polonia</td>
+        <td>Salernitana</td>
+        <td>2003</td>
+      </tr>
+      <tr data-country="Inglaterra">
+        <td>William Osula</td>
+        <td><img src="https://flagcdn.com/w20/gb.png" alt="Inglaterra" class="flag" />Inglaterra</td>
+        <td>Newcastle United</td>
+        <td>2003</td>
+      </tr>
+      <tr data-country="Dinamarca">
+        <td>William Böving</td>
+        <td><img src="https://flagcdn.com/w20/dk.png" alt="Dinamarca" class="flag" />Dinamarca</td>
+        <td>Sturm Graz</td>
+        <td>2003</td>
+      </tr>
+      <tr data-country="Dinamarca">
+        <td>Mathias Kvistgaarden</td>
+        <td><img src="https://flagcdn.com/w20/dk.png" alt="Dinamarca" class="flag" />Dinamarca</td>
+        <td>Brøndby</td>
+        <td>2002</td>
+      </tr>
+      <tr data-country="Dinamarca">
+        <td>Conrad Harder</td>
+        <td><img src="https://flagcdn.com/w20/dk.png" alt="Dinamarca" class="flag" />Dinamarca</td>
+        <td>Sporting CP</td>
+        <td>2005</td>
+      </tr>
+      <tr data-country="Inglaterra">
+        <td>Ethan Nwaneri</td>
+        <td><img src="https://flagcdn.com/w20/gb.png" alt="Inglaterra" class="flag" />Inglaterra</td>
+        <td>Arsenal</td>
+        <td>2007</td>
+      </tr>
+      <tr data-country="Francia">
         <td>Ezechiel Banzuzi</td>
         <td><img src="https://flagcdn.com/w20/fr.png" alt="Francia" class="flag" />Francia</td>
         <td></td>
         <td>2005</td>
       </tr>
-      <tr>
+      <tr data-country="Países Bajos">
         <td>Ruben van Bommel</td>
         <td><img src="https://flagcdn.com/w20/nl.png" alt="Países Bajos" class="flag" />Países Bajos</td>
         <td></td>
         <td>2004</td>
-      </tr>
-      <tr>
-        <td>Ethan Nwaneri</td>
-        <td><img src="https://flagcdn.com/w20/gb.png" alt="Inglaterra" class="flag" />Inglaterra</td>
-        <td>Arsenal</td>
-        <td>2007</td>
       </tr>
     </tbody>
   </table>
@@ -350,57 +425,170 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr data-country="Países Bajos">
         <td>Leo Sauer</td>
         <td><img src="https://flagcdn.com/w20/nl.png" alt="Países Bajos" class="flag" />Países Bajos</td>
         <td>Feyenoord</td>
         <td>2005</td>
       </tr>
-      <tr>
+      <tr data-country="Finlandia">
         <td>Juho Talvitie</td>
         <td><img src="https://flagcdn.com/w20/fi.png" alt="Finlandia" class="flag" />Finlandia</td>
         <td>Heracles Almelo</td>
         <td>2005</td>
       </tr>
-      <tr>
+      <tr data-country="España">
         <td>Jesús Rodríguez</td>
         <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
         <td></td>
         <td>2005</td>
       </tr>
-      <tr>
+      <tr data-country="España">
         <td>Yeremay Hernández</td>
         <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
         <td></td>
         <td>2002</td>
       </tr>
-      <tr>
+      <tr data-country="España">
         <td>Raúl Moro</td>
         <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
         <td></td>
         <td>2002</td>
       </tr>
-      <tr>
+      <tr data-country="Alemania">
         <td>Paul Wanner</td>
         <td><img src="https://flagcdn.com/w20/de.png" alt="Alemania" class="flag" />Alemania</td>
-        <td>Bayern</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Roger Fernandes</td>
-        <td><img src="https://flagcdn.com/w20/pt.png" alt="Portugal" class="flag" />Portugal</td>
-        <td>Portugal</td>
+        <td>Bayern München</td>
         <td>2005</td>
       </tr>
-      <tr>
-        <td>Geovany Quenda</td>
-        <td><img src="https://flagcdn.com/w20/gb.png" alt="Inglaterra" class="flag" />Inglaterra</td>
-        <td>Chelsea</td>
+      <tr data-country="Portugal">
+        <td>Tiago Djaló</td>
+        <td><img src="https://flagcdn.com/w20/pt.png" alt="Portugal" class="flag" />Portugal</td>
+        <td>Lille</td>
+        <td>2000</td>
+      </tr>
+      <tr data-country="España">
+        <td>Álvaro Sanz</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
         <td></td>
+        <td>2003</td>
+      </tr>
+      <tr data-country="España">
+        <td>Amin Jbari</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
+        <td></td>
+        <td>2004</td>
+      </tr>
+      <tr data-country="España">
+        <td>Rafa Marín</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
+        <td></td>
+        <td>2003</td>
+      </tr>
+      <tr data-country="España">
+        <td>Adrián Arregui</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
+        <td></td>
+        <td>2002</td>
+      </tr>
+      <tr data-country="España">
+        <td>Marc Bernad</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
+        <td></td>
+        <td>2003</td>
+      </tr>
+      <tr data-country="España">
+        <td>Rodrigo de la Fuente</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
+        <td></td>
+        <td>2003</td>
+      </tr>
+      <tr data-country="España">
+        <td>Jon Martínez</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
+        <td></td>
+        <td>2004</td>
       </tr>
     </tbody>
   </table>
 </section>
+
+<!-- DELANTEROS -->
+<section class="position-group">
+  <h2>Delanteros (DC, ED, EI)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>País</th>
+        <th>Equipo</th>
+        <th>Año</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-country="España">
+        <td>Adrià Altimira</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
+        <td></td>
+        <td>2004</td>
+      </tr>
+      <tr data-country="España">
+        <td>Marc Casadó</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
+        <td></td>
+        <td>2004</td>
+      </tr>
+      <tr data-country="España">
+        <td>Mikel Araña</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
+        <td></td>
+        <td>2004</td>
+      </tr>
+      <tr data-country="España">
+        <td>Arnau Tenas</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
+        <td></td>
+        <td>2001</td>
+      </tr>
+      <tr data-country="España">
+        <td>Gerard Fernández</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
+        <td></td>
+        <td>2003</td>
+      </tr>
+      <tr data-country="España">
+        <td>Víctor Torrecilla</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
+        <td></td>
+        <td>2005</td>
+      </tr>
+      <tr data-country="España">
+        <td>Antonio Martínez</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="España" class="flag" />España</td>
+        <td></td>
+        <td>2003</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<script>
+  const countryFilter = document.getElementById('country-filter');
+
+  countryFilter.addEventListener('change', () => {
+    const selectedCountry = countryFilter.value;
+
+    const rows = document.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const rowCountry = row.getAttribute('data-country');
+      if (selectedCountry === 'all' || rowCountry === selectedCountry) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
