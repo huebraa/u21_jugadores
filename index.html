@@ -175,7 +175,60 @@
 const players = [
   {name:"Lucas Bergström", pos:"POR", country:"Finlandia", team:"Chelsea", year:"2002", desc:"Portero de Chelsea con experiencia internacional y presencia fuerte bajo los palos."},
   {name:"Noah Atubolu", pos:"POR", country:"Alemania", team:"Alemania", year:"2002", desc:"Mejor portero del torneo según SCOUTED, combinación de seguridad y juego con los pies."},
-  // (Agrega todos tus jugadores aquí...)
+  // Laterales derechos
+  {name:"Nathaniel Brown", pos:"LD", country:"Alemania", team:"Eintracht Frankfurt", year:"2003", desc:"Combina defensa sólida con peligro ofensivo gracias a sus buenos centros."},
+  {name:"Michael Kayode", pos:"LD", country:"Italia", team:"Fiorentina", year:"2004", desc:"Parte de la sólida defensa italiana, rápido y agresivo en sus duelos."},
+  {name:"Devyne Rensch", pos:"LD", country:"Países Bajos", team:"Ajax", year:"2003", desc:"Defensa con buen recorrido y técnica destacada para sacar el balón jugado."},
+  {name:"Anton Gaaei", pos:"LD", country:"Dinamarca", team:"Ajax", year:"2002", desc:"Joven danés con gran despliegue físico y calidad técnica en defensa."},
+  {name:"Ryan Flamingo", pos:"LD", country:"Países Bajos", team:"Países Bajos", year:"2002", desc:"Versátil lateral con buen posicionamiento y llegada al ataque."},
+  // Laterales izquierdos
+  {name:"Tomas Galvez", pos:"LI", country:"Finlandia", team:"Manchester City (loan Cambuur)", year:"2005", desc:"Lateral izquierdo con experiencia en ligas holandesas, sólido en defensa y apoyo ofensivo."},
+  {name:"Matteo Ruggeri", pos:"LI", country:"Italia", team:"Atalanta", year:"2002", desc:"Lateral con gran recorrido y solidez defensiva, pieza clave en el equipo italiano."},
+  // Defensas centrales
+  {name:"Diego Coppola", pos:"DFC", country:"Italia", team:"Hellas Verona", year:"2003", desc:"Dominante en duelos aéreos y en interceptar el juego, su temporada ha sido espectacular."},
+  {name:"Ümit Akdağ", pos:"DFC", country:"Rumanía", team:"Toulouse", year:"2003", desc:"Defensa central zurdo con buen juego posicional y físico robusto."},
+  {name:"Louis Munteanu", pos:"DC", country:"Rumanía", team:"CFR Cluj", year:"2002", desc:"Delantero que destaca por su olfato goleador, ganador de la Bota de Oro en su liga."},
+  {name:"Jan Paluska", pos:"DFC", country:"Chequia", team:"Viktor Plzeň", year:"2005", desc:"Joven central con buena lectura defensiva y proyección a futuro."},
+  {name:"Charlie Cresswell", pos:"DFC", country:"Inglaterra", team:"Inglaterra", year:"2002", desc:"Parte de la defensa inglesa, físico imponente y buen manejo del balón."},
+  {name:"Finn Jeltsch", pos:"DFC", country:"Alemania", team:"VfB Stuttgart", year:"2004", desc:"Defensor con buen posicionamiento y experiencia en campeonatos juveniles."},
+  {name:"Nathan Zézé", pos:"DFC", country:"Francia", team:"", year:"", desc:"Potencial para Premier League, defensor con buen juego aéreo y anticipación."},
+  {name:"Cristhian Mosquera", pos:"DFC", country:"España", team:"Valencia", year:"2004", desc:"Joven talento defensivo con técnica depurada y buen desplazamiento."},
+  {name:"César Tárrega", pos:"DFC", country:"España", team:"Valencia", year:"2002", desc:"Compañero de Mosquera, defensa con buen posicionamiento y anticipación."},
+  {name:"Taras Mykhavko", pos:"DFC", country:"Ucrania", team:"Dynamo Kyiv", year:"2005", desc:"Destacado joven central con experiencia en Europa League y Premier Liga."},
+  {name:"Wout Goes", pos:"DFC", country:"Países Bajos", team:"Países Bajos", year:"2004", desc:"Defensor con buena técnica y rapidez para recuperar la posición."},
+  {name:"Jorrel Hato", pos:"DFC", country:"Países Bajos", team:"Países Bajos", year:"2006", desc:"Joven central con mucho potencial, buena salida con balón."},
+  {name:"Castello Lukeba", pos:"DFC", country:"Francia", team:"Francia", year:"2002", desc:"Unico jugador francés con experiencia senior, defensa de gran calidad y liderazgo."},
+  // Centrocampistas
+  {name:"Volodymyr Brazhko", pos:"MC", country:"Ucrania", team:"Dynamo Kyiv", year:"2002", desc:"Mediocampista sólido, buena presencia física y capacidad para distribuir juego."},
+  {name:"Noah Nartey", pos:"MC", country:"Dinamarca", team:"Dinamarca", year:"", desc:"Mediocampista resistente a la presión, clave en la circulación del balón."},
+  {name:"Lucien Agoumé", pos:"MC", country:"Francia", team:"Francia", year:"2002", desc:"Mediocampista con altísima tasa de éxito en regates, creativo y efectivo."},
+  {name:"Hayden Hackney", pos:"MC", country:"Inglaterra", team:"Inglaterra", year:"2003", desc:"Experto en progresión del balón, tiene visión y dinamismo para dominar el centro del campo."},
+  {name:"Matěj Šín", pos:"MC", country:"Chequia", team:"Baník Ostrava", year:"2004", desc:"Centrocampista con experiencia senior y buena técnica."},
+  {name:"Mikel Jauregizar", pos:"MC", country:"España", team:"España", year:"2003", desc:"Medio con buen pie y capacidad para iniciar jugadas ofensivas."},
+  {name:"Gabriel Sigua", pos:"MC", country:"Georgia", team:"FC Basel", year:"2005", desc:"Joven con proyección, destacado físicamente y con experiencia internacional."},
+  {name:"Rocco Reitz", pos:"MC", country:"Alemania", team:"Alemania", year:"2002", desc:"Mediocentro con buen control del ritmo de partido."},
+  {name:"Merlin Röhl", pos:"MC", country:"Alemania", team:"Alemania", year:"2002", desc:"Medio versátil, con buena técnica y visión de juego."},
+  {name:"Paul Nebel", pos:"MC", country:"Alemania", team:"Alemania", year:"2002", desc:"Jugador con buen despliegue físico y técnica para crear ocasiones."},
+  // Extremos / Delanteros interiores
+  {name:"Leo Sauer", pos:"ED", country:"Eslovaquia", team:"Feyenoord", year:"2005", desc:"Extremo con buen regate y capacidad para desequilibrar por banda."},
+  {name:"Juho Talvitie", pos:"ED", country:"Finlandia", team:"Heracles Almelo", year:"2005", desc:"Extremo rápido con buena técnica y visión para asistir."},
+  {name:"Jesús Rodríguez", pos:"EI", country:"España", team:"España", year:"2005", desc:"Jugador creativo con buen disparo y visión de pase."},
+  {name:"Yeremay Hernández", pos:"EI", country:"España", team:"España", year:"2002", desc:"Delantero interior con gran movilidad y buen uno contra uno."},
+  {name:"Raúl Moro", pos:"EI", country:"España", team:"España", year:"2002", desc:"Jugador desequilibrante, rápido y con capacidad goleadora."},
+  {name:"Paul Wanner", pos:"EI", country:"Alemania", team:"Bayern", year:"", desc:"Joven talento con técnica depurada y buen entendimiento táctico."},
+  {name:"Roger Fernandes", pos:"EI", country:"Portugal", team:"Portugal", year:"2005", desc:"Extremo con mucha velocidad y regate, peligroso en el uno contra uno."},
+  {name:"Geovany Quenda", pos:"EI", country:"Angola", team:"Chelsea", year:"", desc:"Jugador con potencia física y capacidad de desborde."},
+  // Delanteros centro
+  {name:"Thierno Barry", pos:"DC", country:"Francia", team:"Francia", year:"2003", desc:"Delantero potente, buena definición y movilidad en área."},
+  {name:"Szymon Włodarczyk", pos:"DC", country:"Polonia", team:"Salernitana", year:"2003", desc:"Jugador con olfato goleador, rápido y efectivo en el remate."},
+  {name:"William Osula", pos:"DC", country:"Inglaterra", team:"Newcastle United", year:"2003", desc:"Delantero con buena técnica y capacidad para asociarse."},
+  {name:"William Böving", pos:"DC", country:"Dinamarca", team:"Sturm Graz", year:"2003", desc:"Jugador móvil, capaz de generar espacios y rematar bien."},
+  {name:"Mathias Kvistgaarden", pos:"DC", country:"Dinamarca", team:"Brøndby", year:"2002", desc:"Delantero con buen físico y buen juego aéreo."},
+  {name:"Conrad Harder", pos:"DC", country:"Dinamarca", team:"Sporting CP", year:"2005", desc:"Joven delantero con proyección y buen manejo del balón."},
+  // Mediapuntas
+  {name:"Ethan Nwaneri", pos:"MP", country:"Inglaterra", team:"Arsenal", year:"2007", desc:"Jugador muy joven, técnico y con visión para crear peligro."},
+  {name:"Ezechiel Banzuzi", pos:"MP", country:"Francia", team:"", year:"2005", desc:"Mediapunta creativo con buen uno contra uno y visión."},
+  {name:"Ruben van Bommel", pos:"MP", country:"Países Bajos", team:"", year:"2004", desc:"Jugador con buen pase y llegada desde segunda línea."}
 ];
 
 function getFlagUrl(country) {
