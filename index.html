@@ -21,7 +21,22 @@
 </head>
 <body>
 
-<h1>Jugadores U‑21 con Supabase</h1>
+<h1>
+<div class="controls" style="margin-bottom: 2em; border: 1px solid #ccc; padding: 1em; background: #eef6ff;">
+  <h2>Añadir nuevo jugador</h2>
+  <form id="formAgregarJugador">
+    <input type="text" id="nombre" placeholder="Nombre" required />
+    <input type="text" id="posicion" placeholder="Posición" required />
+    <input type="text" id="pais" placeholder="País" required />
+    <input type="text" id="equipo" placeholder="Equipo" />
+    <input type="text" id="anio" placeholder="Año" />
+    <input type="text" id="descripcion" placeholder="Descripción de juego" style="width: 300px;" />
+    <button type="submit">Añadir</button>
+  </form>
+  <div id="mensajeInsertar" style="margin-top: 10px; color: green;"></div>
+</div>
+
+  Jugadores U‑21 con Supabase</h1>
 <div class="controls">
   País: 
   <select id="filterPais">
