@@ -1,100 +1,53 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Jugadores U‑21 - Admin con Supabase</title>
-<style>
-  body { font-family: Arial, sans-serif; background: #f5f8fa; margin: 20px; }
-  h1 { color: #004a99; text-align: center; margin-bottom: 0.5em; }
-  .controller { margin: 20px auto; max-width: 800px; }
-  input, select, textarea, button {
-    padding: 8px; margin: 5px 0;
-    font-size: 1em; width: 100%;
-    box-sizing: border-box;
-  }
-  button {
-    cursor: pointer; background: #004a99;
-    color: white; border: none;
-    padding: 10px;
-  }
-  .message { color: green; margin-top: 10px; }
-  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-  thead { background: #004a99; color: white; }
-  td, th { padding: 10px; border: 1px solid #ccc; vertical-align: top; }
-  tbody tr:nth-child(even) { background: #f0f7ff; }
-  .flag { width:24px; height:16px; margin-right:6px; }
-  .action-btn { margin-right: 5px; padding: 4px 8px; font-size: 0.9em; }
-  .edit-btn { background: #fb923c; color: white; }
-  .delete-btn { background: #ef4444; color: white; }
-</style>
-</head>
-<body>
-<h1>Jugadores U‑21 ‑ Admin Supabase</h1>
-
-<div class="controller">
-  <h2>Añadir / Editar jugador</h2>
-  <form id="jugadorForm">
-    <input type="hidden" id="jugadorId" />
-    <input type="text" id="nombre" placeholder="Nombre" required />
-    <input type="text" id="posicion" placeholder="Posición (POR, LD, DFC...)" required />
-    <input type="text" id="pais" placeholder="País" required />
-    <input type="text" id="equipo" placeholder="Equipo" />
-    <input type="text" id="anio" placeholder="Año" />
-    <textarea id="descripcion" placeholder="Descripción scout"></textarea>
-    <button type="submit">Guardar</button>
-  </form>
-  <div class="message" id="msgForm"></div>
-</div>
-
-<div class="controller">
-  <div>
-    <label for="filterPais">Filtrar por país:</label>
-    <select id="filterPais"><option value="all">Todos</option></select>
-  </div>
-  <div>
-    <label for="searchNombre">Buscar por nombre:</label>
-    <input type="text" id="searchNombre" placeholder="Escribe un nombre..." />
-  </div>
-  <table>
-    <thead>
-      <tr><th>Nombre</th><th>Posición</th><th>País</th><th>Equipo</th>
-          <th>Año</th><th>Descripción</th><th>Acciones</th></tr>
-    </thead>
-    <tbody id="tblJugadores">
-      <tr><td colspan="7">Cargando...</td></tr>
-    </tbody>
-  </table>
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+  // Inicializa Supabase
   const supabase = supabase.createClient(
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRucHd6dm9rZnlia2hienlnZ3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkzNzcwNTksImV4cCI6MjA2NDk1MzA1OX0.d1QdJtCgSMZux2chEYe17Z0uh5vDzkeLab09US2zf7w',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRucHd6dm9rZnlia2hienlnZ3V6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0OTM3NzA1OSwiZXhwIjoyMDY0OTUzMDU5fQ.JMyM0bGjFoptoo8Kc1kNqUQwTtcVdDML0DnBX7kxmJg'
+    'TU_SUPABASE_URL',
+    'TU_SUPABASE_ANON_KEY'
   );
 
   let jugadoresGlobal = [];
 
+  // Función para insertar jugador
+  async function insertarJugador(jugador) {
+    const { data, error } = await supabase
+      .from('jugadores')
+      .insert([jugador]);
+
+    if (error) {
+      console.error('Error insertando jugador:', error);
+      return { success: false, error };
+    }
+    return { success: true, data };
+  }
+
+  // Carga jugadores desde Supabase
   async function cargarJugadores() {
     const { data, error } = await supabase
       .from('jugadores')
       .select('*')
       .order('posicion')
       .order('nombre');
-    if (error) console.error(error);
-    jugadoresGlobal = data;
+    if (error) {
+      console.error(error);
+      return;
+    }
+    jugadoresGlobal = data || [];
     renderFilter();
     renderTabla();
   }
 
+  // Render filtro país
   function renderFilter() {
     const sel = document.getElementById('filterPais');
     sel.innerHTML = '<option value="all">Todos</option>';
-    [...new Set(jugadoresGlobal.map(j=>j.pais))].sort()
+    [...new Set(jugadoresGlobal.map(j => j.pais))]
+      .filter(p => p && p.trim() !== '')
+      .sort()
       .forEach(p => sel.insertAdjacentHTML('beforeend', `<option value="${p}">${p}</option>`));
   }
 
+  // Render tabla de jugadores
   function renderTabla() {
     const sel = document.getElementById('filterPais').value;
     const txt = document.getElementById('searchNombre').value.toLowerCase();
@@ -102,7 +55,7 @@
     tbody.innerHTML = '';
 
     const jugadores = jugadoresGlobal
-      .filter(j => (sel=='all'||j.pais===sel) &&
+      .filter(j => (sel === 'all' || j.pais === sel) &&
                    j.nombre.toLowerCase().includes(txt));
 
     if (!jugadores.length) {
@@ -113,75 +66,94 @@
     jugadores.forEach(j => {
       tbody.insertAdjacentHTML('beforeend', `
 <tr>
-<td>${j.nombre}</td>
-<td>${j.posicion}</td>
-<td><img class="flag" src="${getFlag(j.pais)}" />${j.pais}</td>
-<td>${j.equipo}</td>
-<td>${j.anio}</td>
-<td>${j.descripcion}</td>
-<td>
-  <button class="action-btn edit-btn" onclick="editar(${j.id})">Editar</button>
-  <button class="action-btn delete-btn" onclick="eliminar(${j.id})">Eliminar</button>
-</td></tr>`);
+  <td>${j.nombre}</td>
+  <td>${j.posicion}</td>
+  <td><img class="flag" src="${getFlag(j.pais)}" />${j.pais}</td>
+  <td>${j.equipo}</td>
+  <td>${j.anio}</td>
+  <td>${j.descripcion}</td>
+  <td>
+    <button class="action-btn edit-btn" onclick="editar(${j.id})">Editar</button>
+    <button class="action-btn delete-btn" onclick="eliminar(${j.id})">Eliminar</button>
+  </td>
+</tr>`);
     });
   }
 
+  // Mapea país a código de bandera para mostrar imagen
   function getFlag(country) {
-    const codes = {Finlandia:'fi',Alemania:'de',Italia:'it','Países Bajos':'nl',
-      Dinamarca:'dk','Rumanía':'ro','Chequia':'cz','Inglaterra':'gb-eng',
-      España:'es','Ucrania':'ua','Francia':'fr','Georgia':'ge','Portugal':'pt',
-      Eslovaquia:'sk','Polonia':'pl','Angola':'ao'};
+    const codes = {
+      Finlandia:'fi', Alemania:'de', Italia:'it', 'Países Bajos':'nl',
+      Dinamarca:'dk', Rumanía:'ro', Chequia:'cz', Inglaterra:'gb-eng',
+      España:'es', Ucrania:'ua', Francia:'fr', Georgia:'ge', Portugal:'pt',
+      Eslovaquia:'sk', Polonia:'pl', Angola:'ao'
+    };
     return codes[country] ? `https://flagcdn.com/w20/${codes[country]}.png` : '';
   }
 
+  // Evento submit del formulario: insertar o actualizar jugador
   document.getElementById('jugadorForm').onsubmit = async function(e) {
     e.preventDefault();
     const id = document.getElementById('jugadorId').value;
-    const payload = {
-      nombre: document.getElementById('nombre').value,
-      posicion: document.getElementById('posicion').value,
-      pais: document.getElementById('pais').value,
-      equipo: document.getElementById('equipo').value,
-      anio: document.getElementById('anio').value,
-      descripcion: document.getElementById('descripcion').value
+    const jugador = {
+      nombre: document.getElementById('nombre').value.trim(),
+      posicion: document.getElementById('posicion').value.trim(),
+      pais: document.getElementById('pais').value.trim(),
+      equipo: document.getElementById('equipo').value.trim(),
+      anio: document.getElementById('anio').value.trim(),
+      descripcion: document.getElementById('descripcion').value.trim()
     };
-    let result;
+
     if (id) {
-      result = await supabase.from('jugadores').update(payload).eq('id', id);
+      // Actualizar jugador existente
+      const { error } = await supabase.from('jugadores').update(jugador).eq('id', id);
+      if (error) {
+        document.getElementById('msgForm').textContent = '❌ Error actualizando jugador.';
+        console.error(error);
+        return;
+      }
+      document.getElementById('msgForm').textContent = '✏️ Jugador actualizado';
     } else {
-      result = await supabase.from('jugadores').insert(payload);
+      // Insertar nuevo jugador
+      const result = await insertarJugador(jugador);
+      if (!result.success) {
+        document.getElementById('msgForm').textContent = '❌ Error insertando jugador.';
+        return;
+      }
+      document.getElementById('msgForm').textContent = '✅ Jugador añadido';
     }
-    const { error } = result;
-    if (error) {
-      document.getElementById('msgForm').textContent = '❌ Error.';
-      console.error(error);
-    } else {
-      document.getElementById('msgForm').textContent = id ? '✏️ Actualizado' : '✅ Añadido';
-      document.getElementById('jugadorForm').reset();
-      document.getElementById('jugadorId').value = '';
-      cargarJugadores();
-    }
-  }
 
+    document.getElementById('jugadorForm').reset();
+    document.getElementById('jugadorId').value = '';
+    cargarJugadores();
+  };
+
+  // Rellenar formulario para editar jugador
   window.editar = function(id) {
-    const j = jugadoresGlobal.find(x=>x.id===id);
-    Object.keys(j).forEach(k=>{
+    const j = jugadoresGlobal.find(x => x.id === id);
+    if (!j) return;
+    ['jugadorId','nombre','posicion','pais','equipo','anio','descripcion'].forEach(k => {
       const input = document.getElementById(k);
-      if (input) input.value = j[k];
+      if (input) input.value = j[k] || '';
     });
-  }
+  };
 
+  // Eliminar jugador
   window.eliminar = async function(id) {
     if (!confirm('¿Eliminar este jugador?')) return;
     const { error } = await supabase.from('jugadores').delete().eq('id', id);
-    if (error) console.error(error);
-    else cargarJugadores();
-  }
+    if (error) {
+      console.error(error);
+      alert('Error eliminando jugador');
+    } else {
+      cargarJugadores();
+    }
+  };
 
+  // Eventos para filtros
   document.getElementById('filterPais').onchange = renderTabla;
   document.getElementById('searchNombre').oninput = renderTabla;
 
+  // Carga inicial
   cargarJugadores();
 </script>
-</body>
-</html>
